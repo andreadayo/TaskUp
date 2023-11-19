@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Kollektif Font Styles -->
+    <style name="TextAppearance.Kollektif.Bold32" parent="TextAppearance.Material3.HeadlineLarge">
+        <item name="fontFamily">@font/kollektif_bold</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">32sp</item>
+    </style>
+
+    <style name="TextAppearance.Kollektif.Bold24" parent="TextAppearance.Material3.HeadlineMedium">
+        <item name="fontFamily">@font/kollektif_bold</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">24sp</item>
+    </style>
+
+    <style name="TextAppearance.Kollektif.Bold18" parent="TextAppearance.Material3.HeadlineSmall">
+        <item name="fontFamily">@font/kollektif_bold</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">18sp</item>
+    </style>
+
+    <!-- Jakarta Sans Font Styles -->
+    <style name="TextAppearance.JakartaSans.Medium18" parent="TextAppearance.Material3.BodyLarge">
+        <item name="fontFamily">@font/plusjakartasans_medium</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:textSize">18sp</item>
+    </style>
+
+    <style name="TextAppearance.JakartaSans.Bold18" parent="TextAppearance.Material3.BodyLarge">
+        <item name="fontFamily">@font/plusjakartasans_bold</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">18sp</item>
+    </style>
+
+    <style name="TextAppearance.JakartaSans.Medium16" parent="TextAppearance.Material3.BodyMedium">
+        <item name="fontFamily">@font/plusjakartasans_medium</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <style name="TextAppearance.JakartaSans.Bold16" parent="TextAppearance.Material3.BodyMedium">
+        <item name="fontFamily">@font/plusjakartasans_bold</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <style name="TextAppearance.JakartaSans.Medium14" parent="TextAppearance.Material3.BodySmall">
+        <item name="fontFamily">@font/plusjakartasans_medium</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="TextAppearance.JakartaSans.Bold14" parent="TextAppearance.Material3.BodySmall">
+        <item name="fontFamily">@font/plusjakartasans_bold</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="TextAppearance.JakartaSans.Medium12" parent="TextAppearance.Material3.LabelLarge">
+        <item name="fontFamily">@font/plusjakartasans_medium</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:textSize">12sp</item>
+    </style>
+
+    <style name="TextAppearance.JakartaSans.Bold12" parent="TextAppearance.Material3.LabelLarge">
+        <item name="fontFamily">@font/plusjakartasans_bold</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">12sp</item>
+    </style>
+
+    <style name="TextAppearance.JakartaSans.Medium10" parent="TextAppearance.Material3.LabelMedium">
+        <item name="fontFamily">@font/plusjakartasans_medium</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:textSize">10sp</item>
+    </style>
+
+    <style name="TextAppearance.JakartaSans.Bold10" parent="TextAppearance.Material3.LabelMedium">
+        <item name="fontFamily">@font/plusjakartasans_bold</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">10sp</item>
+    </style>
+
+    <style name="TextAppearance.JakartaSans.Medium8" parent="TextAppearance.Material3.LabelSmall">
+        <item name="fontFamily">@font/plusjakartasans_medium</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:textSize">8sp</item>
+    </style>
+
+    <style name="TextAppearance.JakartaSans.Bold8" parent="TextAppearance.Material3.LabelSmall">
+        <item name="fontFamily">@font/plusjakartasans_bold</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">8sp</item>
+    </style>
+
+</resources>
