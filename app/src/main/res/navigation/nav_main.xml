@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_main"
+    app:startDestination="@id/projectsFragment">
+
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.example.taskup.HomeFragment"
+        android:label="fragment_profile"
+        tools:layout="@layout/fragment_home" />
+    <fragment
+        android:id="@+id/projectsFragment"
+        android:name="com.example.taskup.ProjectsFragment"
+        android:label="fragment_projects"
+        tools:layout="@layout/fragment_projects" />
+    <fragment
+        android:id="@+id/tasksFragment"
+        android:name="com.example.taskup.TasksFragment"
+        android:label="fragment_tasks"
+        tools:layout="@layout/fragment_tasks" />
+    <fragment
+        android:id="@+id/calendarFragment"
+        android:name="com.example.taskup.CalendarFragment"
+        android:label="fragment_calendar"
+        tools:layout="@layout/fragment_calendar" />
+
+</navigation>
