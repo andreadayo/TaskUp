@@ -4,31 +4,56 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    android:background="?attr/colorSecondaryContainer"
+    tools:context=".MainActivity"
+    >
 
-    <fragment
-        android:id="@+id/activity_main_nav_host_fragment"
-        android:name="androidx.navigation.fragment.NavHostFragment"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        app:defaultNavHost="true"
-        app:layout_constraintBottom_toTopOf="@+id/bottomNavigationView"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:navGraph="@navigation/nav_main" />
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:layout_editor_absoluteX="1dp"
+        tools:layout_editor_absoluteY="1dp"
+        android:gravity="center">
 
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/bottomNavigationView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="?android:colorBackground"
-        android:elevation="8dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:labelVisibilityMode="labeled"
-        app:menu="@menu/nav_menu" />
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="278dp"
+            app:srcCompat="@drawable/productivity_image" />
 
+        <TextView
+            android:id="@+id/tvTitle"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:text="Manage your daily tasks"
+            android:textAlignment="center"
+            style="@style/TextAppearance.Kollektif.Bold32"
+            android:textColor="?attr/colorOnPrimaryContainer"
+            />
+
+        <TextView
+            android:id="@+id/tvSubtitle"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="35dp"
+            android:text="Streamline your to-do list and accomplish your goals with ease"
+            android:textAlignment="center"
+            style="@style/TextAppearance.JakartaSans.Medium16"
+            android:textColor="?attr/colorOnPrimaryContainer"
+            />
+
+        <Button
+            android:id="@+id/btnGetStarted"
+            android:layout_width="230dp"
+            android:layout_height="wrap_content"
+            android:padding="16dp"
+            android:backgroundTint="?attr/colorOnPrimaryContainer"
+            android:text="Get Started"
+            android:textColor="?attr/colorOnPrimary"
+            style="@style/TextAppearance.JakartaSans.SemiBold16"
+            app:cornerRadius="4dp" />
+
+
+    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

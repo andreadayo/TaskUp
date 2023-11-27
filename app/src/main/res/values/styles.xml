@@ -38,6 +38,12 @@
         <item name="android:textSize">16sp</item>
     </style>
 
+    <style name="TextAppearance.JakartaSans.SemiBold16" parent="TextAppearance.Material3.BodyMedium">
+        <item name="fontFamily">@font/plusjakartasans_semibold</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
     <style name="TextAppearance.JakartaSans.Bold16" parent="TextAppearance.Material3.BodyMedium">
         <item name="fontFamily">@font/plusjakartasans_bold</item>
         <item name="android:textStyle">bold</item>
@@ -50,6 +56,12 @@
         <item name="android:textSize">14sp</item>
     </style>
 
+    <style name="TextAppearance.JakartaSans.SemiBold14" parent="TextAppearance.Material3.BodySmall">
+        <item name="fontFamily">@font/plusjakartasans_semibold</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
     <style name="TextAppearance.JakartaSans.Bold14" parent="TextAppearance.Material3.BodySmall">
         <item name="fontFamily">@font/plusjakartasans_bold</item>
         <item name="android:textStyle">bold</item>
@@ -59,6 +71,12 @@
     <style name="TextAppearance.JakartaSans.Medium12" parent="TextAppearance.Material3.LabelLarge">
         <item name="fontFamily">@font/plusjakartasans_medium</item>
         <item name="android:textStyle">normal</item>
+        <item name="android:textSize">12sp</item>
+    </style>
+
+    <style name="TextAppearance.JakartaSans.SemiBold12" parent="TextAppearance.Material3.LabelLarge">
+        <item name="fontFamily">@font/plusjakartasans_semibold</item>
+        <item name="android:textStyle">bold</item>
         <item name="android:textSize">12sp</item>
     </style>
 
