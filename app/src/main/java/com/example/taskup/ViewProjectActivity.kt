@@ -1,29 +1,24 @@
 package com.example.taskup
 
-import android.content.ClipData
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import android.widget.ListView
 
-class HomeFragment : Fragment() {
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        val view = inflater.inflate(R.layout.fragment_home, container, false)
+class ViewProjectActivity : AppCompatActivity() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_view_project)
 
-        val listView: ListView = view.findViewById(R.id.listView)
+        val listView: ListView = findViewById(R.id.listView)
         val data = listOf(
-            Pair("Item 1", "Description 1"),
-            Pair("Item 2", "Description 2"),
-            Pair("Item 3", "Description 3"),
+            Pair("Project Item 1", "Description 1"),
+            Pair("Project Item 2", "Description 2"),
+            Pair("Project Item 3", "Description 3"),
+            Pair("Project Item 4", "Description 4"),
+            Pair("Project Item 5", "Description 5")
         )  // sample data
 
-        val adapter = ListAdapter(requireContext(), data)
+        val adapter = ListAdapter(this, data)
         listView.adapter = adapter
 
         // Calculate the total height of the items
@@ -31,8 +26,6 @@ class HomeFragment : Fragment() {
 
         // Set the height of the ListView
         listView.layoutParams.height = totalHeight
-
-        return view
     }
 
     private fun calculateTotalHeight(listView: ListView): Int {
@@ -48,5 +41,3 @@ class HomeFragment : Fragment() {
         return totalHeight
     }
 }
-
-
