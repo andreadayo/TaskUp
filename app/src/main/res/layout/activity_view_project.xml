@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ViewProjectActivity">
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="1" />
+
+    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+        android:id="@+id/add_fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="24dp"
+        android:backgroundTint="?attr/colorPrimary"
+        app:icon="@drawable/baseline_add_24"
+        app:iconTint="?attr/colorPrimaryContainer"
+        app:layout_constraintBottom_toTopOf="@id/guideline"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:paddingLeft="30dp"
+            android:paddingRight="30dp"
+            android:paddingTop="50dp"
+            android:paddingBottom="50dp"
+            tools:layout_editor_absoluteX="1dp"
+            tools:layout_editor_absoluteY="1dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="fill_horizontal"
+                android:layout_marginBottom="20dp"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.5"
+                    android:gravity="start"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="35dp"
+                        android:layout_height="35dp"
+                        android:layout_gravity="center_vertical"
+                        app:srcCompat="@drawable/baseline_chevron_left_24"
+                        app:tint="?attr/colorOnBackground" />
+
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/tvProjectName"
+                    style="@style/TextAppearance.Kollektif.Bold24"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Project Name"
+                    android:textAlignment="center"
+                    android:textColor="?attr/colorOnBackground" />
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.5"
+                    android:gravity="end"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        app:srcCompat="@drawable/baseline_edit_24"
+                        app:tint="?attr/colorOnBackground" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="16dp"
+                android:orientation="horizontal"
+                android:gravity="center">
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chipAllTasks"
+                    style="@style/Widget.Material3.Chip.Filter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="8dp"
+                    android:text="All"
+                    android:textAlignment="center"
+                    android:textColor="?attr/colorTertiary"
+                    android:textAppearance="@style/TextAppearance.JakartaSans.SemiBold12"
+                    app:chipCornerRadius="20dp"
+                    android:backgroundTint="?attr/colorTertiaryContainer"
+                    app:chipStrokeWidth="0dp"
+                    app:chipStrokeColor="@android:color/transparent"
+                    />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chipNotInitiated"
+                    style="@style/Widget.Material3.Chip.Filter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="8dp"
+                    android:text="Pending"
+                    android:textAlignment="center"
+                    android:textColor="?attr/colorOutline"
+                    android:textAppearance="@style/TextAppearance.JakartaSans.SemiBold12"
+                    app:chipCornerRadius="20dp"
+                    android:backgroundTint="?attr/colorOnSurfaceInverse"
+                    app:chipStrokeWidth="0dp"
+                    app:chipStrokeColor="@android:color/transparent"
+                    />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chipOngoing"
+                    style="@style/Widget.Material3.Chip.Filter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="8dp"
+                    android:text="Ongoing"
+                    android:textAlignment="center"
+                    android:textColor="?attr/colorQuaternary"
+                    android:textAppearance="@style/TextAppearance.JakartaSans.SemiBold12"
+                    app:chipCornerRadius="20dp"
+                    android:backgroundTint="?attr/colorQuaternaryContainer"
+                    app:chipStrokeWidth="0dp"
+                    app:chipStrokeColor="@android:color/transparent"/>
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chipDone"
+                    style="@style/Widget.Material3.Chip.Filter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Done"
+                    android:textAlignment="center"
+                    android:textColor="?attr/colorPrimary"
+                    android:textAppearance="@style/TextAppearance.JakartaSans.SemiBold12"
+                    app:chipCornerRadius="20dp"
+                    android:backgroundTint="?attr/colorPrimaryContainer"
+                    app:chipStrokeWidth="0dp"
+                    app:chipStrokeColor="@android:color/transparent"/>
+
+            </LinearLayout>
+
+            <ListView
+                android:id="@+id/listView"
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                app:layout_constraintBottom_toTopOf="@id/bottomNavigationView" />
+
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
