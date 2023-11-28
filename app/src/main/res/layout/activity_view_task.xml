@@ -1,0 +1,387 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ViewTaskActivity">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:paddingLeft="30dp"
+            android:paddingRight="30dp"
+            android:paddingTop="50dp"
+            android:paddingBottom="50dp"
+            tools:layout_editor_absoluteX="1dp"
+            tools:layout_editor_absoluteY="1dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="fill_horizontal"
+                android:layout_marginBottom="20dp"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.5"
+                    android:gravity="start"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="35dp"
+                        android:layout_height="35dp"
+                        android:layout_gravity="center_vertical"
+                        app:srcCompat="@drawable/baseline_chevron_left_24"
+                        app:tint="?attr/colorOnBackground" />
+
+                </LinearLayout>
+
+                <ImageView
+                    android:layout_width="92dp"
+                    android:layout_height="51dp"
+                    app:srcCompat="@drawable/taskup_logo" />
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.5"
+                    android:gravity="end"
+                    android:orientation="horizontal">
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <!-- Title TextField -->
+            <TextView
+                android:id="@+id/labelTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:text="Title"
+                style="@style/TextAppearance.JakartaSans.Medium14"
+                android:textColor="?attr/colorOnBackground"
+                />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tfTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="18dp"
+                app:hintEnabled="false" >
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Task Name"
+                    style="@style/TextAppearance.JakartaSans.Medium14" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <!-- Due Date TextField -->
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginRight="16dp"
+                    android:orientation="vertical"
+                    android:layout_weight="1">
+
+                    <TextView
+                        android:id="@+id/labelDueDate"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="5dp"
+                        android:text="Due Date"
+                        style="@style/TextAppearance.JakartaSans.Medium14"
+                        android:textColor="?attr/colorOnBackground"
+                        />
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/tfDueDate"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="18dp"
+                        app:hintEnabled="false" >
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="Select Date"
+                            android:inputType="none"
+                            style="@style/TextAppearance.JakartaSans.Medium14" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+                </LinearLayout>
+
+                <!-- Time TextField -->
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:layout_weight="0.7">
+
+                    <TextView
+                        android:id="@+id/labelTime"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="5dp"
+                        android:text="Time"
+                        style="@style/TextAppearance.JakartaSans.Medium14"
+                        android:textColor="?attr/colorOnBackground"
+                        />
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/tfTime"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="18dp"
+                        app:hintEnabled="false" >
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="Select Time"
+                            android:inputType="none"
+                            style="@style/TextAppearance.JakartaSans.Medium14" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <!-- Description TextField -->
+            <TextView
+                android:id="@+id/labelDescription"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:text="Description"
+                style="@style/TextAppearance.JakartaSans.Medium14"
+                android:textColor="?attr/colorOnBackground"
+                />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tfDescription"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="18dp"
+                app:hintEnabled="false" >
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Write a note here"
+                        style="@style/TextAppearance.JakartaSans.Medium14" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- Project TextField -->
+            <TextView
+                android:id="@+id/labelProject"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:text="Project"
+                style="@style/TextAppearance.JakartaSans.Medium14"
+                android:textColor="?attr/colorOnBackground"
+                />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tfProject"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="18dp"
+                app:hintEnabled="false"
+                style="@style/Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu">
+
+                <AutoCompleteTextView
+                    android:id="@+id/autoCompleteTextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Select Project"
+                    android:inputType="none"
+                    style="@style/TextAppearance.JakartaSans.Medium14" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- Status -->
+            <TextView
+                android:id="@+id/labelStatus"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:text="Status"
+                style="@style/TextAppearance.JakartaSans.Medium14"
+                android:textColor="?attr/colorOnBackground"
+                />
+
+            <com.google.android.material.chip.ChipGroup
+                android:id="@+id/chipGroupStatus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="18dp">
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chipPending"
+                    style="@style/Widget.Material3.Chip.Filter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="8dp"
+                    android:text="Pending"
+                    android:textAlignment="center"
+                    android:textColor="?attr/colorOutline"
+                    android:textAppearance="@style/TextAppearance.JakartaSans.SemiBold14"
+                    app:chipCornerRadius="20dp"
+                    android:backgroundTint="?attr/colorOnSurfaceInverse"
+                    app:chipStrokeWidth="0dp"
+                    app:chipStrokeColor="@android:color/transparent"
+                    />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chipOngoing"
+                    style="@style/Widget.Material3.Chip.Filter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="8dp"
+                    android:text="Ongoing"
+                    android:textAlignment="center"
+                    android:textColor="?attr/colorQuaternary"
+                    android:textAppearance="@style/TextAppearance.JakartaSans.SemiBold14"
+                    app:chipCornerRadius="20dp"
+                    android:backgroundTint="?attr/colorQuaternaryContainer"
+                    app:chipStrokeWidth="0dp"
+                    app:chipStrokeColor="@android:color/transparent"/>
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chipDone"
+                    style="@style/Widget.Material3.Chip.Filter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Done"
+                    android:textAlignment="center"
+                    android:textColor="?attr/colorPrimary"
+                    android:textAppearance="@style/TextAppearance.JakartaSans.SemiBold14"
+                    app:chipCornerRadius="20dp"
+                    android:backgroundTint="?attr/colorPrimaryContainer"
+                    app:chipStrokeWidth="0dp"
+                    app:chipStrokeColor="@android:color/transparent"/>
+
+            </com.google.android.material.chip.ChipGroup>
+
+            <!-- Priority -->
+            <TextView
+                android:id="@+id/labelPriority"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:text="Priority"
+                style="@style/TextAppearance.JakartaSans.Medium14"
+                android:textColor="?attr/colorOnBackground"
+                />
+
+            <com.google.android.material.chip.ChipGroup
+                android:id="@+id/chipGroupPriority"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="40dp">
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chipLow"
+                    style="@style/Widget.Material3.Chip.Filter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="8dp"
+                    android:text="Low"
+                    android:textAlignment="center"
+                    android:textColor="?attr/colorPrimary"
+                    android:textAppearance="@style/TextAppearance.JakartaSans.SemiBold14"
+                    app:chipCornerRadius="20dp"
+                    android:backgroundTint="?attr/colorPrimaryContainer"
+                    app:chipStrokeWidth="0dp"
+                    app:chipStrokeColor="@android:color/transparent"/>
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chipModerate"
+                    style="@style/Widget.Material3.Chip.Filter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="8dp"
+                    android:text="Moderate"
+                    android:textAlignment="center"
+                    android:textColor="?attr/colorQuaternary"
+                    android:textAppearance="@style/TextAppearance.JakartaSans.SemiBold14"
+                    app:chipCornerRadius="20dp"
+                    android:backgroundTint="?attr/colorQuaternaryContainer"
+                    app:chipStrokeWidth="0dp"
+                    app:chipStrokeColor="@android:color/transparent"/>
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chipAllTasks"
+                    style="@style/Widget.Material3.Chip.Filter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="8dp"
+                    android:text="High"
+                    android:textAlignment="center"
+                    android:textColor="?attr/colorTertiary"
+                    android:textAppearance="@style/TextAppearance.JakartaSans.SemiBold14"
+                    app:chipCornerRadius="20dp"
+                    android:backgroundTint="?attr/colorTertiaryContainer"
+                    app:chipStrokeWidth="0dp"
+                    app:chipStrokeColor="@android:color/transparent"
+                    />
+
+            </com.google.android.material.chip.ChipGroup>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/btnDelete"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginRight="8dp"
+                    android:padding="16dp"
+                    android:backgroundTint="?attr/colorTertiary"
+                    android:text="Delete"
+                    android:textColor="?attr/colorOnPrimary"
+                    style="@style/TextAppearance.JakartaSans.SemiBold16"
+                    app:cornerRadius="4dp" />
+
+                <Button
+                    android:id="@+id/btnSave"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginLeft="8dp"
+                    android:padding="16dp"
+                    android:backgroundTint="?attr/colorOnPrimaryContainer"
+                    android:text="Save"
+                    android:textColor="?attr/colorOnPrimary"
+                    style="@style/TextAppearance.JakartaSans.SemiBold16"
+                    app:cornerRadius="4dp" />
+
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
