@@ -110,4 +110,23 @@
         <item name="android:textSize">8sp</item>
     </style>
 
+    <!-- Calendar View -->
+    <style name="CustomDateTextAppearance" parent="TextAppearance.AppCompat.Widget.ActionBar.Title">
+        <item name="fontFamily">@font/plusjakartasans_semibold</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="CustomWeekDayTextAppearance" parent="TextAppearance.AppCompat.Widget.ActionBar.Title">
+        <item name="fontFamily">@font/plusjakartasans_semibold</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="CustomDayTextAppearance" parent="TextAppearance.AppCompat.Widget.ActionBar.Title">
+        <item name="fontFamily">@font/plusjakartasans_semibold</item>
+        <item name="android:textSize">10sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
 </resources>
