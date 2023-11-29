@@ -1,22 +1,95 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/itemTitle"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        android:padding="8dp"/>
+        android:orientation="horizontal">
 
-    <TextView
-        android:id="@+id/itemDescription"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="16sp"
-        android:padding="8dp"/>
+        <View
+            android:layout_width="5dp"
+            android:layout_height="match_parent"
+            android:background="?attr/colorOutline" />
+
+
+        <CheckBox
+            android:id="@+id/checkBox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_weight="1">
+
+            <TextView
+                android:id="@+id/tvTaskName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Task Name"
+                style="@style/TextAppearance.JakartaSans.Bold16"
+                android:textColor="?attr/colorOnBackground"
+                />
+
+            <TextView
+                android:id="@+id/tvTaskDueDate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="12 November 2023"
+                style="@style/TextAppearance.JakartaSans.Medium12"
+                android:textColor="?attr/colorOutline"
+                />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chipStatus"
+                    style="@style/Widget.Material3.Chip.Filter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="8dp"
+                    android:text="Pending"
+                    android:textAlignment="center"
+                    android:textColor="?attr/colorOutline"
+                    android:textAppearance="@style/TextAppearance.JakartaSans.SemiBold12"
+                    app:chipCornerRadius="20dp"
+                    android:backgroundTint="?attr/colorOnSurfaceInverse"
+                    app:chipStrokeWidth="0dp"
+                    app:chipStrokeColor="@android:color/transparent"
+                    />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chipPriority"
+                    style="@style/Widget.Material3.Chip.Filter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="8dp"
+                    android:text="High"
+                    android:textAlignment="center"
+                    android:textColor="?attr/colorTertiary"
+                    android:textAppearance="@style/TextAppearance.JakartaSans.SemiBold12"
+                    app:chipCornerRadius="20dp"
+                    android:backgroundTint="?attr/colorTertiaryContainer"
+                    app:chipStrokeWidth="0dp"
+                    app:chipStrokeColor="@android:color/transparent"
+                    />
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+
+    </LinearLayout>
 
 </LinearLayout>

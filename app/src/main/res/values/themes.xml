@@ -26,7 +26,7 @@
         <item name="colorOutline">@color/md_theme_light_outline</item>
         <item name="colorOnSurfaceInverse">@color/md_theme_light_inverseOnSurface</item>
         <item name="colorSurfaceInverse">@color/md_theme_light_inverseSurface</item>
-        <item name="colorQuaternary">#755b00</item>
+        <item name="colorQuaternary">#EBBF3B</item>
         <item name="colorOnQuaternary">#ffffff</item>
         <item name="colorQuaternaryContainer">#ffe08f</item>
         <item name="colorOnQuaternaryContainer">#241a00</item>

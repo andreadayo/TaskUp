@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="370dp"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardCornerRadius="20dp"
+    android:layout_gravity="center">
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_gravity="center"
+        android:padding="20dp">
+
+        <TextView
+            android:id="@+id/tvTitle"
+            style="@style/TextAppearance.Kollektif.Bold18"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:text="Logout"
+            android:layout_gravity="center"
+            android:textColor="?attr/colorOnBackground" />
+
+        <!-- Project Title TextField -->
+        <TextView
+            android:id="@+id/labelProjectTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="24dp"
+            android:text="Are you sure you want to log out? Any unsaved changes will be lost."
+            android:textAlignment="center"
+            style="@style/TextAppearance.JakartaSans.Medium14"
+            android:textColor="?attr/colorOnBackground"
+            />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btnCancelLogout"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginRight="8dp"
+                android:padding="16dp"
+                android:backgroundTint="?attr/colorOnSurfaceInverse"
+                android:text="Cancel"
+                android:textColor="?attr/colorOutline"
+                style="@style/TextAppearance.JakartaSans.SemiBold16"
+                app:cornerRadius="4dp" />
+
+            <Button
+                android:id="@+id/btnConfirmLogout"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginLeft="8dp"
+                android:padding="16dp"
+                android:backgroundTint="?attr/colorOnPrimaryContainer"
+                android:text="Save"
+                android:textColor="?attr/colorOnPrimary"
+                style="@style/TextAppearance.JakartaSans.SemiBold16"
+                app:cornerRadius="4dp" />
+
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>
