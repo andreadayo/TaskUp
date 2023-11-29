@@ -17,13 +17,6 @@ class TasksFragment : Fragment() {
     ): View? {
         val view = inflater.inflate(R.layout.fragment_tasks, container, false)
 
-        // Find the chip within the inflated layout
-        val chipAllTasks = view.findViewById<Chip>(R.id.chipAllTasks)
-        chipAllTasks.setOnClickListener {
-            val i = Intent(requireContext(), ViewTaskActivity::class.java)
-            startActivity(i)
-        }
-
         return view
     }
 }

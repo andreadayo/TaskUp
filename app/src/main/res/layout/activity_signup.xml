@@ -21,6 +21,7 @@
             android:paddingLeft="30dp"
             android:paddingRight="30dp">
 
+            <!-- Header -->
             <ImageView
                 android:layout_width="168dp"
                 android:layout_height="46dp"
@@ -126,6 +127,7 @@
 
             </com.google.android.material.textfield.TextInputLayout>
 
+            <!-- Signup Button -->
             <Button
                 android:id="@+id/btnSignup"
                 android:layout_width="match_parent"
@@ -153,6 +155,7 @@
                     style="@style/TextAppearance.JakartaSans.Medium14"
                     android:textColor="?attr/colorOutline" />
 
+                <!-- Link to login if they already have an account -->
                 <TextView
                     android:id="@+id/tvLoginLink"
                     android:layout_width="wrap_content"
