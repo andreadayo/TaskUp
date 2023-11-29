@@ -15,6 +15,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        // Link to Signup
         val btnGetStarted = findViewById<Button>(R.id.btnGetStarted)
         btnGetStarted.setOnClickListener {
             val i = Intent(this,SignupActivity::class.java)

@@ -13,8 +13,9 @@
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="1" />
 
+    <!-- FAB to open add task -->
     <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
-        android:id="@+id/add_fab"
+        android:id="@+id/fabButtonNewTask"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="end"
@@ -55,7 +56,9 @@
                     android:gravity="start"
                     android:orientation="horizontal">
 
+                    <!-- Back Icon Button -->
                     <ImageView
+                        android:id="@+id/btnBack"
                         android:layout_width="35dp"
                         android:layout_height="35dp"
                         android:layout_gravity="center_vertical"
@@ -81,7 +84,9 @@
                     android:gravity="end"
                     android:orientation="horizontal">
 
+                    <!-- Edit Icon Button -->
                     <ImageView
+                        android:id="@+id/btnEditProject"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
@@ -99,8 +104,9 @@
                 android:orientation="horizontal"
                 android:gravity="center">
 
+                <!-- Chip: All Filter -->
                 <com.google.android.material.chip.Chip
-                    android:id="@+id/chipAllTasks"
+                    android:id="@+id/chipAll"
                     style="@style/Widget.Material3.Chip.Filter"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -115,6 +121,7 @@
                     app:chipStrokeColor="@android:color/transparent"
                     />
 
+                <!-- Chip: Pending Filter -->
                 <com.google.android.material.chip.Chip
                     android:id="@+id/chipPending"
                     style="@style/Widget.Material3.Chip.Filter"
@@ -131,6 +138,7 @@
                     app:chipStrokeColor="@android:color/transparent"
                     />
 
+                <!-- Chip: Ongoing Filter -->
                 <com.google.android.material.chip.Chip
                     android:id="@+id/chipOngoing"
                     style="@style/Widget.Material3.Chip.Filter"
@@ -139,13 +147,14 @@
                     android:layout_marginRight="8dp"
                     android:text="Ongoing"
                     android:textAlignment="center"
-                    android:textColor="?attr/colorQuaternary"
+                    android:textColor="?attr/colorOnQuaternaryContainer"
                     android:textAppearance="@style/TextAppearance.JakartaSans.SemiBold12"
                     app:chipCornerRadius="20dp"
                     android:backgroundTint="?attr/colorQuaternaryContainer"
                     app:chipStrokeWidth="0dp"
                     app:chipStrokeColor="@android:color/transparent"/>
 
+                <!-- Chip: Done Filter -->
                 <com.google.android.material.chip.Chip
                     android:id="@+id/chipDone"
                     style="@style/Widget.Material3.Chip.Filter"
@@ -166,7 +175,9 @@
                 android:id="@+id/listView"
                 android:layout_width="match_parent"
                 android:layout_height="300dp"
-                app:layout_constraintBottom_toTopOf="@id/bottomNavigationView" />
+                app:layout_constraintBottom_toTopOf="@id/bottomNavigationView"
+                android:divider="@android:color/transparent"
+                android:dividerHeight="24dp"/>
 
 
         </LinearLayout>

@@ -1,8 +1,14 @@
 package com.example.taskup
 
+import android.app.Dialog
+import android.content.Intent
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import android.view.Window
+import android.widget.Button
 import android.widget.Switch
 import android.widget.TextView
 import android.widget.Toast
@@ -20,97 +26,85 @@ class AppActivity : AppCompatActivity() {
     private lateinit var binding: ActivityAppBinding
     private lateinit var navController: NavController
 
-    private lateinit var mAddAlarmFab: FloatingActionButton
-    private lateinit var mAddPersonFab: FloatingActionButton
+    private lateinit var fabButtonNewTask: FloatingActionButton
+    private lateinit var fabButtonNewProject: FloatingActionButton
     private lateinit var mAddFab: ExtendedFloatingActionButton
-    private lateinit var addAlarmActionText: TextView
-    private lateinit var addPersonActionText: TextView
+    private lateinit var fabTextNewTask: TextView
+    private lateinit var fabTextNewProject: TextView
     private var isAllFabsVisible: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        // For controlling the bottom navbar
         binding = ActivityAppBinding.inflate(layoutInflater)
         setContentView(binding.root)
         navController = Navigation.findNavController(this, R.id.activity_app_nav_host_fragment)
         setupWithNavController(binding.bottomNavigationView, navController)
 
-        // Enable DayNight mode
-        //AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-
-        /*
-        val darkModeSwitch = findViewById<Switch>(R.id.darkModeSwitch)
-
-        // Check the current mode and set the switch accordingly
-        darkModeSwitch.isChecked = AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES
-
-        darkModeSwitch.setOnCheckedChangeListener { _, isChecked ->
-            val transition = AutoTransition()
-            transition.duration = 500 // Set the duration of the transition in milliseconds
-
-            // Use TransitionManager to animate the changes
-            TransitionManager.beginDelayedTransition(findViewById(android.R.id.content), transition)
-
-            if (isChecked) {
-                // Enable dark mode
-                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-            } else {
-                // Enable light mode
-                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-            }
-
-            // Recreate the activity to apply the new mode
-            recreate()
-
-
-        }*/
-
-        //setContentView(R.layout.activity_app)
-
-        //setContentView(R.layout.activity_app)
-
+        // For controlling the floating action button (FAB)
         mAddFab = findViewById(R.id.add_fab)
-        mAddAlarmFab = findViewById(R.id.add_alarm_fab)
-        mAddPersonFab = findViewById(R.id.add_person_fab)
-        addAlarmActionText = findViewById(R.id.add_alarm_action_text)
-        addPersonActionText = findViewById(R.id.add_person_action_text)
+        fabButtonNewTask = findViewById(R.id.fabButtonNewTask)
+        fabButtonNewProject = findViewById(R.id.fabButtonNewProject)
+        fabTextNewTask = findViewById(R.id.fabTextNewTask)
+        fabTextNewProject = findViewById(R.id.fabTextNewProject)
 
-        mAddAlarmFab.visibility = View.GONE
-        mAddPersonFab.visibility = View.GONE
-        addAlarmActionText.visibility = View.GONE
-        addPersonActionText.visibility = View.GONE
+        fabButtonNewTask.visibility = View.GONE
+        fabButtonNewProject.visibility = View.GONE
+        fabTextNewTask.visibility = View.GONE
+        fabTextNewProject.visibility = View.GONE
 
         isAllFabsVisible = false
         mAddFab.shrink()
 
         mAddFab.setOnClickListener {
             isAllFabsVisible = if (!isAllFabsVisible) {
-                mAddAlarmFab.show()
-                mAddPersonFab.show()
-                addAlarmActionText.visibility = View.VISIBLE
-                addPersonActionText.visibility = View.VISIBLE
+                fabButtonNewTask.show()
+                fabButtonNewProject.show()
+                fabTextNewTask.visibility = View.VISIBLE
+                fabTextNewProject.visibility = View.VISIBLE
                 mAddFab.extend()
                 true
             } else {
-                mAddAlarmFab.hide()
-                mAddPersonFab.hide()
-                addAlarmActionText.visibility = View.GONE
-                addPersonActionText.visibility = View.GONE
+                fabButtonNewTask.hide()
+                fabButtonNewProject.hide()
+                fabTextNewTask.visibility = View.GONE
+                fabTextNewProject.visibility = View.GONE
                 mAddFab.shrink()
                 false
             }
         }
 
-        mAddPersonFab.setOnClickListener {
-            showToast("Person Added")
+        // Open Add Project Dialog
+        fabButtonNewProject.setOnClickListener {
+            showAddProjectDialog()
         }
 
-        mAddAlarmFab.setOnClickListener {
-            showToast("Alarm Added")
+        // Redirect to Add Task
+        fabButtonNewTask.setOnClickListener {
+            val i = Intent(this,AddTaskActivity::class.java)
+            startActivity(i)
         }
     }
 
-    private fun showToast(message: String) {
-        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+    private fun showAddProjectDialog() {
+        val dialog = Dialog(this)
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        dialog.setCancelable(true)
+        dialog.setContentView(R.layout.dialog_add_project)
+        dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+
+        val btnCreate = dialog.findViewById<Button>(R.id.btnCreateProject)
+        val btnCancel = dialog.findViewById<Button>(R.id.btnCancelProject)
+
+        btnCreate.setOnClickListener{
+            // add and save project to database
+        }
+        btnCancel.setOnClickListener{
+            dialog.dismiss()
+        }
+
+        dialog.show()
     }
+
 }

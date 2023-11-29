@@ -29,7 +29,7 @@
         <item name="colorQuaternary">#EBBF3B</item>
         <item name="colorOnQuaternary">#ffffff</item>
         <item name="colorQuaternaryContainer">#ffe08f</item>
-        <item name="colorOnQuaternaryContainer">#241a00</item>
+        <item name="colorOnQuaternaryContainer">#926A00</item>
         <item name="harmonizeQuaternary">true</item>
         <item name="colorPrimaryInverse">@color/md_theme_light_inversePrimary</item>
     </style>

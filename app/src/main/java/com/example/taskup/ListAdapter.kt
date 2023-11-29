@@ -9,7 +9,7 @@ import android.widget.ArrayAdapter
 import android.widget.BaseAdapter
 import android.widget.TextView
 
-class ListAdapter(private val context: Context, private val data: List<Pair<String, String>>) : BaseAdapter() {
+class ListAdapter(private val context: Context, private val data: List<TaskData>) : BaseAdapter() {
 
     override fun getCount(): Int {
         return data.size
@@ -26,12 +26,18 @@ class ListAdapter(private val context: Context, private val data: List<Pair<Stri
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
         val view: View = convertView ?: LayoutInflater.from(context).inflate(R.layout.list_item_task, parent, false)
 
-        val itemTitle: TextView = view.findViewById(R.id.itemTitle)
-        val itemDescription: TextView = view.findViewById(R.id.itemDescription)
+        // val taskProject: TextView = view.findViewById(R.id.projectTheme) // should be view - will be fixed when backend is integrated
+        val taskName: TextView = view.findViewById(R.id.tvTaskName)
+        val taskDueDate: TextView = view.findViewById(R.id.tvTaskDueDate)
+        val taskStatus: TextView = view.findViewById(R.id.chipStatus)
+        val taskPriority: TextView = view.findViewById(R.id.chipPriority)
 
-        val (title, description) = data[position]
-        itemTitle.text = title
-        itemDescription.text = description
+        val taskData = data[position]
+        // taskProject.text = taskData.projectCategory
+        taskName.text = taskData.taskName
+        taskDueDate.text = taskData.dueDate
+        taskStatus.text = taskData.status
+        taskPriority.text = taskData.priority
 
         return view
     }

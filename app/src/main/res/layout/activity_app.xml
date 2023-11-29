@@ -19,6 +19,7 @@
         app:layout_constraintVertical_bias="1.0"
         app:navGraph="@navigation/nav_main" />
 
+    <!-- Bottom Navbar -->
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNavigationView"
         android:layout_width="0dp"
@@ -31,6 +32,7 @@
         app:labelVisibilityMode="labeled"
         app:menu="@menu/nav_menu" />
 
+    <!-- Guideline for FAB -->
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline"
         android:layout_width="wrap_content"
@@ -38,6 +40,7 @@
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.9" />
 
+    <!-- Guideline for FAB -->
     <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
         android:id="@+id/add_fab"
         android:layout_width="wrap_content"
@@ -51,9 +54,9 @@
         app:layout_constraintBottom_toTopOf="@id/guideline"
         app:layout_constraintEnd_toEndOf="parent" />
 
-    <!--Floating action button for add alarm-->
+    <!-- Floating action button for New Task -->
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/add_alarm_fab"
+        android:id="@+id/fabButtonNewTask"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="24dp"
@@ -64,39 +67,42 @@
         app:layout_constraintEnd_toEndOf="@+id/add_fab"
         app:srcCompat="@drawable/baseline_checklist_24"
         android:contentDescription="@string/app_name" />
-    <!--Action name text for the add task button-->
+
+    <!-- Action name text for the add task button -->
     <TextView
-        android:id="@+id/add_alarm_action_text"
+        android:id="@+id/fabTextNewTask"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:text="New task"
-        app:layout_constraintBottom_toBottomOf="@+id/add_alarm_fab"
-        app:layout_constraintEnd_toStartOf="@+id/add_alarm_fab"
-        app:layout_constraintTop_toTopOf="@+id/add_alarm_fab" />
-    <!--Floating action button for add person-->
+        app:layout_constraintBottom_toBottomOf="@+id/fabButtonNewTask"
+        app:layout_constraintEnd_toStartOf="@+id/fabButtonNewTask"
+        app:layout_constraintTop_toTopOf="@+id/fabButtonNewTask" />
+
+    <!-- Floating action button for add person-->
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/add_person_fab"
+        android:id="@+id/fabButtonNewProject"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="24dp"
         android:backgroundTint="?attr/colorPrimaryContainer"
         app:fabSize="normal"
         app:tint="?attr/colorPrimary"
-        app:layout_constraintBottom_toTopOf="@+id/add_alarm_fab"
-        app:layout_constraintEnd_toEndOf="@+id/add_alarm_fab"
-        app:layout_constraintStart_toStartOf="@+id/add_alarm_fab"
+        app:layout_constraintBottom_toTopOf="@+id/fabButtonNewTask"
+        app:layout_constraintEnd_toEndOf="@+id/fabButtonNewTask"
+        app:layout_constraintStart_toStartOf="@+id/fabButtonNewTask"
         app:srcCompat="@drawable/baseline_folder_open_24"
         android:contentDescription="@string/app_name" />
-    <!--Action name text for the add person button-->
+
+    <!-- Action name text for the add person button-->
     <TextView
-        android:id="@+id/add_person_action_text"
+        android:id="@+id/fabTextNewProject"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:text="New Project"
-        app:layout_constraintBottom_toBottomOf="@+id/add_person_fab"
-        app:layout_constraintEnd_toStartOf="@+id/add_person_fab"
-        app:layout_constraintTop_toTopOf="@+id/add_person_fab" />
+        app:layout_constraintBottom_toBottomOf="@+id/fabButtonNewProject"
+        app:layout_constraintEnd_toStartOf="@+id/fabButtonNewProject"
+        app:layout_constraintTop_toTopOf="@+id/fabButtonNewProject" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
