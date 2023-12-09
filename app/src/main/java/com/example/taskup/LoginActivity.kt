@@ -5,35 +5,65 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import android.widget.TextView
+import androidx.appcompat.app.AlertDialog
 import com.google.android.material.textfield.TextInputLayout
 
 class LoginActivity : AppCompatActivity() {
+
+    private lateinit var dbHelper: DatabaseHelper
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
-        // Don't have an account? Redirect to Signup
+        dbHelper = DatabaseHelper(this)
+
         val tvSignupLink = findViewById<TextView>(R.id.tvSignupLink)
         tvSignupLink.setOnClickListener {
-            val i = Intent(this,SignupActivity::class.java)
+            val i = Intent(this, SignupActivity::class.java)
             startActivity(i)
         }
 
-        // Fields
         val u_name = findViewById<TextInputLayout>(R.id.tfUsername)
         val u_pass = findViewById<TextInputLayout>(R.id.tfPassword)
 
-        val username = u_name.editText?.text.toString()
-        val password = u_pass.editText?.text.toString()
-
-        // ***** TEMPORARY LINK: for frontend testing
-        // After successful login should redirect to App
         val btnLogin = findViewById<Button>(R.id.btnLogin)
         btnLogin.setOnClickListener {
-            val i = Intent(this,AppActivity::class.java)
-            startActivity(i)
+            val username = u_name.editText?.text.toString()
+            val password = u_pass.editText?.text.toString()
+
+            if (username.isNotEmpty() && password.isNotEmpty()) {
+                val user = dbHelper.getUser(username, password)
+
+                if (user != null) {
+                    // User authenticated, navigate to AppActivity
+                    val i = Intent(this, AppActivity::class.java)
+                    startActivity(i)
+                    finish() // Finish this activity to prevent going back to login using the back button
+                } else {
+                    // Show dialog for invalid credentials
+                    showInvalidCredentialsDialog()
+                }
+            } else {
+                // Handle empty fields (perhaps show a toast or error message)
+            }
         }
+    }
 
+        private fun showInvalidCredentialsDialog() {
+        val dialogBuilder = AlertDialog.Builder(this)
+        dialogBuilder.setMessage("Username or password does not match")
+            .setCancelable(false)
+            .setPositiveButton("OK") { dialog, _ ->
+                dialog.dismiss()
+            }
+        val alert = dialogBuilder.create()
+        alert.show()
+    }
 
+    override fun onDestroy() {
+        dbHelper.close() // Close the database when the activity is destroyed
+        super.onDestroy()
     }
 }
+
