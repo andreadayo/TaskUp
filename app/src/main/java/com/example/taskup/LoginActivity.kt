@@ -46,7 +46,7 @@ class LoginActivity : AppCompatActivity() {
                     showInvalidCredentialsDialog()
                 }
             } else {
-                // Handle empty fields (perhaps show a toast or error message)
+                showErrorDialog()
             }
         }
     }
@@ -60,6 +60,17 @@ class LoginActivity : AppCompatActivity() {
             }
         val alert = dialogBuilder.create()
         alert.show()
+    }
+
+         private fun showErrorDialog() {
+         val dialogBuilder = AlertDialog.Builder(this)
+         dialogBuilder.setMessage("ERROR 404")
+             .setCancelable(false)
+             .setPositiveButton("OK") { dialog, _ ->
+                 dialog.dismiss()
+            }
+          val alert = dialogBuilder.create()
+          alert.show()
     }
 
     override fun onDestroy() {

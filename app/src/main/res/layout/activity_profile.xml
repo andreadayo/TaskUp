@@ -89,7 +89,7 @@
                         style="@style/TextAppearance.JakartaSans.Bold16"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="John Doe"
+                        android:text="Username"
                         android:textAlignment="center"
                         android:textColor="?attr/colorOnPrimaryContainer" />
 
@@ -98,7 +98,7 @@
                         style="@style/TextAppearance.JakartaSans.Bold10"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="User ID: john.doe"
+                        android:text="email"
                         android:textAlignment="center"
                         android:textColor="?attr/colorOutline" />
 

@@ -23,7 +23,7 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(
         private const val TABLE_TASKS = "tasks"
 
         //Users Table
-        private const val KEY_ID = "userId"
+        private const val KEY_ID = "id"
         private const val KEY_EMAIL = "email"
         private const val KEY_USERNAME = "username"
         private const val KEY_PASSWORD = "password"
@@ -32,7 +32,7 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(
         private const val KEY_PROJECT_ID = "project_id"
         private const val KEY_PROJECT_TITLE = "project_title"
         private const val KEY_PROJECT_STATUS = "project_status"
-        private const val KEY_USER_ID = "userId" // Foreign key column referencing users_id
+        private const val KEY_USER_ID = "user_id" // Foreign key column referencing users_id
 
         // Tasks Table - Column names
         private const val KEY_TASK_ID = "task_id"
@@ -115,9 +115,123 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(
             cursor.close()
             user
         } else {
-            cursor.close()
+            cursor?.close()
             null
         }
+    }
+
+    fun addProject(title: String, status: String, userId: Int): Long {
+        val db = this.writableDatabase
+        val values = ContentValues().apply {
+            put(KEY_PROJECT_TITLE, title)
+            put(KEY_PROJECT_STATUS, status)
+            put(KEY_USER_ID, userId)
+        }
+        val id = db.insert(TABLE_PROJECTS, null, values)
+        db.close()
+        return id
+    }
+    @SuppressLint("Range")
+    fun getProjects(userId: Int): List<Project> {
+        val projects = mutableListOf<Project>()
+        val db = this.readableDatabase
+        val query = "SELECT * FROM $TABLE_PROJECTS WHERE $KEY_USER_ID = ?"
+        val cursor = db.rawQuery(query, arrayOf(userId.toString()))
+
+        cursor.use { cursor ->
+            while (cursor.moveToNext()) {
+                val projectId = cursor.getInt(cursor.getColumnIndex(KEY_PROJECT_ID))
+                val title = cursor.getString(cursor.getColumnIndex(KEY_PROJECT_TITLE))
+                val status = cursor.getString(cursor.getColumnIndex(KEY_PROJECT_STATUS))
+
+                val project = Project(projectId, title, status, userId)
+                projects.add(project)
+            }
+        }
+        return projects
+    }
+    fun updateProject(projectId: Int, title: String, status: String): Boolean {
+        val db = this.writableDatabase
+        val values = ContentValues().apply {
+            put(KEY_PROJECT_TITLE, title)
+            put(KEY_PROJECT_STATUS, status)
+        }
+        val result = db.update(TABLE_PROJECTS, values, "$KEY_PROJECT_ID = ?", arrayOf(projectId.toString()))
+        db.close()
+        return result != -1
+    }
+
+    fun deleteProject(projectId: Int): Boolean {
+        val db = this.writableDatabase
+        val result = db.delete(TABLE_PROJECTS, "$KEY_PROJECT_ID = ?", arrayOf(projectId.toString()))
+        db.close()
+        return result != -1
+    }
+    fun addTask(
+        title: String,
+        due: String,
+        time: String,
+        description: String,
+        status: String,
+        priority: String,
+        projectId: Int
+    ): Long {
+        val db = this.writableDatabase
+        val values = ContentValues().apply {
+            put(KEY_TASK_TITLE, title)
+            put(KEY_TASK_DUE, due)
+            put(KEY_TASK_TIME, time)
+            put(KEY_TASK_DESC, description)
+            put(KEY_TASK_STATUS, status)
+            put(KEY_TASK_PRIORITY, priority)
+            put(KEY_TASK_PROJECT_ID, projectId)
+        }
+        val id = db.insert(TABLE_TASKS, null, values)
+        db.close()
+        return id
+    }
+    @SuppressLint("Range")
+    fun getTasks(projectId: Int): List<Task> {
+        val tasks = mutableListOf<Task>()
+        val db = this.readableDatabase
+        val query = "SELECT * FROM $TABLE_TASKS WHERE $KEY_TASK_PROJECT_ID = ?"
+        val cursor = db.rawQuery(query, arrayOf(projectId.toString()))
+
+        cursor.use { cursor ->
+            while (cursor.moveToNext()) {
+                val taskId = cursor.getInt(cursor.getColumnIndex(KEY_TASK_ID))
+                val title = cursor.getString(cursor.getColumnIndex(KEY_TASK_TITLE))
+                val due = cursor.getString(cursor.getColumnIndex(KEY_TASK_DUE))
+                val time = cursor.getString(cursor.getColumnIndex(KEY_TASK_TIME))
+                val description = cursor.getString(cursor.getColumnIndex(KEY_TASK_DESC))
+                val status = cursor.getString(cursor.getColumnIndex(KEY_TASK_STATUS))
+                val priority = cursor.getString(cursor.getColumnIndex(KEY_TASK_PRIORITY))
+
+                val task = Task(taskId, title, due, time, description, status, priority, projectId)
+                tasks.add(task)
+            }
+        }
+        return tasks
+    }
+    fun updateTask(taskId: Int, title: String, due: String, time: String, desc: String, status: String, priority: String): Boolean {
+        val db = this.writableDatabase
+        val values = ContentValues().apply {
+            put(KEY_TASK_TITLE, title)
+            put(KEY_TASK_DUE, due)
+            put(KEY_TASK_TIME, time)
+            put(KEY_TASK_DESC, desc)
+            put(KEY_TASK_STATUS, status)
+            put(KEY_TASK_PRIORITY, priority)
+        }
+        val result = db.update(TABLE_TASKS, values, "$KEY_TASK_ID = ?", arrayOf(taskId.toString()))
+        db.close()
+        return result != -1
+    }
+    fun deleteTask(taskId: Int): Boolean {
+        val db = this.writableDatabase
+        val result = db.delete(TABLE_TASKS, "$KEY_TASK_ID = ?", arrayOf(taskId.toString()))
+        db.close()
+        return result != -1
     }
 
 }

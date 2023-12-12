@@ -19,6 +19,11 @@ class ProfileActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_profile)
 
+        val username = intent.getStringExtra("USERNAME")
+        val user = "$username"
+        val tvName = findViewById<TextView>(R.id.tvName)
+        tvName.text = user
+
         // Back Icon Link
         val btnBack = findViewById<ImageView>(R.id.btnBack)
         btnBack.setOnClickListener {
@@ -50,16 +55,17 @@ class ProfileActivity : AppCompatActivity() {
         val dialog = Dialog(this)
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
         dialog.setCancelable(true)
-        dialog.setContentView(R.layout.dialog_add_project)
+        dialog.setContentView(R.layout.dialog_logout)
         dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
 
-        val btnLogout = dialog.findViewById<Button>(R.id.btnLogout)
+        val btnConfirmLogout = dialog.findViewById<Button>(R.id.btnConfirmLogout)
 
-        btnLogout.setOnClickListener{
+        btnConfirmLogout.setOnClickListener{
             // logout - remove session
 
             val i = Intent(this,LoginActivity::class.java)
             startActivity(i)
+            finish()
         }
 
         dialog.show()
