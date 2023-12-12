@@ -38,6 +38,7 @@ class LoginActivity : AppCompatActivity() {
                 if (user != null) {
                     // User authenticated, navigate to AppActivity
                     val i = Intent(this, AppActivity::class.java)
+                    i.putExtra("USERNAME", username)
                     startActivity(i)
                     finish() // Finish this activity to prevent going back to login using the back button
                 } else {

@@ -85,6 +85,10 @@ class AppActivity : AppCompatActivity() {
             val i = Intent(this,AddTaskActivity::class.java)
             startActivity(i)
         }
+        val username = intent.getStringExtra("USERNAME")
+        val user = "$username"
+        val tvUser = findViewById<TextView>(R.id.tvUser)
+        tvUser.text = user
     }
 
     private fun showAddProjectDialog() {

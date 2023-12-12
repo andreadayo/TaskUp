@@ -15,7 +15,7 @@ data class TaskData(
     val taskName: String,
     val dueDate: String,
     val status: String,
-    val priority: String
+    val priority: String,
 )
 
 class HomeFragment : Fragment() {
