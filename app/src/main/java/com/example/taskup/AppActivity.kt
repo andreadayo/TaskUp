@@ -21,6 +21,8 @@ import androidx.transition.AutoTransition
 import androidx.transition.TransitionManager
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.google.android.material.textfield.TextInputEditText
+import com.google.android.material.textfield.TextInputLayout
 
 class AppActivity : AppCompatActivity() {
     private lateinit var binding: ActivityAppBinding
@@ -32,9 +34,12 @@ class AppActivity : AppCompatActivity() {
     private lateinit var fabTextNewTask: TextView
     private lateinit var fabTextNewProject: TextView
     private var isAllFabsVisible: Boolean = false
+    private lateinit var dbHelper: DatabaseHelper
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        dbHelper = DatabaseHelper(this)
 
         // For controlling the bottom navbar
         binding = ActivityAppBinding.inflate(layoutInflater)
@@ -100,15 +105,39 @@ class AppActivity : AppCompatActivity() {
 
         val btnCreate = dialog.findViewById<Button>(R.id.btnCreateProject)
         val btnCancel = dialog.findViewById<Button>(R.id.btnCancelProject)
+        val projectTitleInput = dialog.findViewById<TextInputEditText>(R.id.projectTitleInput) // Assuming you have an EditText for the project title
 
-        btnCreate.setOnClickListener{
-            // add and save project to database
+        btnCreate.setOnClickListener {
+            val title = projectTitleInput.text.toString()
+            if (title != null) {
+                if (title.isNotEmpty()) {
+
+                    val userId = intent.getIntExtra("USER_ID", -1)
+
+                    // Call addProject from DatabaseHelper to add the project
+                    val projectId = dbHelper.addProject(title, "Pending", userId.toInt()) // Modify status as needed
+
+                    if (projectId != -1L) {
+                        // Project added successfully
+                        Toast.makeText(this, "Project added!", Toast.LENGTH_SHORT).show()
+                    } else {
+                        // Failed to add project
+                        Toast.makeText(this, "Failed to add project!", Toast.LENGTH_SHORT).show()
+                    }
+
+                    dialog.dismiss()
+                } else {
+                    Toast.makeText(this, "Please enter a project title", Toast.LENGTH_SHORT).show()
+                }
+            }
         }
-        btnCancel.setOnClickListener{
+
+        btnCancel.setOnClickListener {
             dialog.dismiss()
         }
 
         dialog.show()
     }
+
 
 }

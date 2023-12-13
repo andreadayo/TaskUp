@@ -33,13 +33,14 @@ class LoginActivity : AppCompatActivity() {
             val password = u_pass.editText?.text.toString()
 
             if (username.isNotEmpty() && password.isNotEmpty()) {
-                val user = dbHelper.getUser(username, password)
+                val (user, userId) = dbHelper.getUser(username, password)
 
-                if (user != null) {
+                if (user != null && userId != null) {
                     // User authenticated, navigate to AppActivity
-                    val i = Intent(this, AppActivity::class.java)
-                    i.putExtra("USERNAME", username)
-                    startActivity(i)
+                    val intent = Intent(this, AppActivity::class.java)
+                    intent.putExtra("USER_ID", userId) // Pass the user ID
+                    intent.putExtra("USERNAME", username)
+                    startActivity(intent)
                     finish() // Finish this activity to prevent going back to login using the back button
                 } else {
                     // Show dialog for invalid credentials
@@ -49,6 +50,7 @@ class LoginActivity : AppCompatActivity() {
                 showErrorDialog()
             }
         }
+
     }
 
         private fun showInvalidCredentialsDialog() {

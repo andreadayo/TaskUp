@@ -7,6 +7,7 @@ import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 
+
 class DatabaseHelper(context: Context) : SQLiteOpenHelper(
     context,
     DATABASE_NAME,
@@ -101,24 +102,33 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(
     }
 
     @SuppressLint("Range")
-    fun getUser(username: String, password: String): User? {
+    fun getUser(username: String, password: String): Pair<User?, Int?> {
         val db = this.readableDatabase
-        val cursor: Cursor = db.rawQuery("SELECT * FROM $TABLE_USERS WHERE $KEY_USERNAME=? AND $KEY_PASSWORD=?", arrayOf(username, password))
+        val cursor = db.rawQuery("SELECT * FROM $TABLE_USERS WHERE $KEY_USERNAME=? AND $KEY_PASSWORD=?", arrayOf(username, password))
 
-        return if (cursor.moveToFirst()) {
-            val user = User(
+        val userId = if (cursor.moveToFirst()) {
+            cursor.getInt(cursor.getColumnIndex(KEY_ID))
+        } else {
+            null
+        }
+
+        val user = if (userId != null) {
+            User(
                 cursor.getInt(cursor.getColumnIndex(KEY_ID)),
                 cursor.getString(cursor.getColumnIndex(KEY_EMAIL)),
                 cursor.getString(cursor.getColumnIndex(KEY_USERNAME)),
                 cursor.getString(cursor.getColumnIndex(KEY_PASSWORD))
             )
-            cursor.close()
-            user
         } else {
-            cursor?.close()
             null
         }
+
+        cursor.close()
+        db.close()
+
+        return Pair(user, userId)
     }
+
 
     fun addProject(title: String, status: String, userId: Int): Long {
         val db = this.writableDatabase
@@ -233,5 +243,4 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(
         db.close()
         return result != -1
     }
-
 }
