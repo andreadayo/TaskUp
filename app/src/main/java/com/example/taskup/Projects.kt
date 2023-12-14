@@ -4,5 +4,5 @@ data class Project(
     val projectId: Int,
     val title: String,
     val status: String,
-    val userId: Int
+    val userId: Int?
 )

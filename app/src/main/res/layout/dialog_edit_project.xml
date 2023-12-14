@@ -6,7 +6,7 @@
     app:cardCornerRadius="20dp"
     android:layout_gravity="center">
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
@@ -42,10 +42,11 @@
             app:hintEnabled="false" >
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/editProjectInput"
+                style="@style/TextAppearance.JakartaSans.Medium14"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Project Title"
-                style="@style/TextAppearance.JakartaSans.Medium14" />
+                android:hint="Project Title" />
 
         </com.google.android.material.textfield.TextInputLayout>
 

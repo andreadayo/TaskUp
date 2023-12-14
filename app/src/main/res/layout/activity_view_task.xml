@@ -79,10 +79,11 @@
                 app:hintEnabled="false" >
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/taskNameUpdate"
+                    style="@style/TextAppearance.JakartaSans.Medium14"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Task Name"
-                    style="@style/TextAppearance.JakartaSans.Medium14" />
+                    android:hint="Task Name" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -117,11 +118,12 @@
                         app:hintEnabled="false" >
 
                         <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/dueDateUpdate"
+                            style="@style/TextAppearance.JakartaSans.Medium14"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:hint="Select Date"
-                            android:inputType="none"
-                            style="@style/TextAppearance.JakartaSans.Medium14" />
+                            android:inputType="none" />
 
                     </com.google.android.material.textfield.TextInputLayout>
                 </LinearLayout>
@@ -151,11 +153,12 @@
                         app:hintEnabled="false" >
 
                         <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/selectTimeUpdate"
+                            style="@style/TextAppearance.JakartaSans.Medium14"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:hint="Select Time"
-                            android:inputType="none"
-                            style="@style/TextAppearance.JakartaSans.Medium14" />
+                            android:inputType="none" />
 
                     </com.google.android.material.textfield.TextInputLayout>
                 </LinearLayout>
@@ -180,11 +183,12 @@
                 android:layout_marginBottom="18dp"
                 app:hintEnabled="false" >
 
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="Write a note here"
-                        style="@style/TextAppearance.JakartaSans.Medium14" />
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/descUpdate"
+                    style="@style/TextAppearance.JakartaSans.Medium14"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Write a note here" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -208,7 +212,7 @@
                 style="@style/Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu">
 
                 <AutoCompleteTextView
-                    android:id="@+id/autoCompleteTextView"
+                    android:id="@+id/selectProject"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Select Project"

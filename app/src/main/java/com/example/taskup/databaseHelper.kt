@@ -3,7 +3,6 @@ package com.example.taskup
 import android.annotation.SuppressLint
 import android.content.ContentValues
 import android.content.Context
-import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 
@@ -30,12 +29,12 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(
         private const val KEY_PASSWORD = "password"
 
         //Projects Table
-        private const val KEY_PROJECT_ID = "project_id"
+        private const val KEY_PROJECT_ID = "projectId"
         private const val KEY_PROJECT_TITLE = "project_title"
         private const val KEY_PROJECT_STATUS = "project_status"
         private const val KEY_USER_ID = "user_id" // Foreign key column referencing users_id
 
-        // Tasks Table - Column names
+        // Tasks Table
         private const val KEY_TASK_ID = "task_id"
         private const val KEY_TASK_TITLE = "task_title"
         private const val KEY_TASK_DUE = "task_due"
@@ -137,12 +136,12 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(
             put(KEY_PROJECT_STATUS, status)
             put(KEY_USER_ID, userId)
         }
-        val id = db.insert(TABLE_PROJECTS, null, values)
+        val projectId = db.insert(TABLE_PROJECTS, null, values)
         db.close()
-        return id
+        return projectId
     }
     @SuppressLint("Range")
-    fun getProjects(userId: Int): List<Project> {
+    fun getProjects(userId: Int?): List<Project> {
         val projects = mutableListOf<Project>()
         val db = this.readableDatabase
         val query = "SELECT * FROM $TABLE_PROJECTS WHERE $KEY_USER_ID = ?"
@@ -243,4 +242,21 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(
         db.close()
         return result != -1
     }
+
+    @SuppressLint("Range")
+    fun getUserIdFromUsername(username: String): Int? {
+        val db = this.readableDatabase
+        val query = "SELECT $KEY_USER_ID FROM $TABLE_USERS WHERE $KEY_USERNAME = ?"
+        val cursor = db.rawQuery(query, arrayOf(username))
+
+        var userId: Int? = null
+        cursor.use { cursor ->
+            if (cursor.moveToNext()) {
+                userId = cursor.getInt(cursor.getColumnIndex(KEY_USER_ID))
+            }
+        }
+        return userId
+    }
+
+
 }
