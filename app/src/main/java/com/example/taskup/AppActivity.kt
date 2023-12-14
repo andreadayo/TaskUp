@@ -85,9 +85,11 @@ class AppActivity : AppCompatActivity() {
             showAddProjectDialog()
         }
 
+        val userId = intent.getStringExtra("userId")
         // Redirect to Add Task
         fabButtonNewTask.setOnClickListener {
             val i = Intent(this,AddTaskActivity::class.java)
+            i.putExtra("USER_ID", userId)
             startActivity(i)
         }
         val username = intent.getStringExtra("USERNAME")
@@ -105,17 +107,17 @@ class AppActivity : AppCompatActivity() {
 
         val btnCreate = dialog.findViewById<Button>(R.id.btnCreateProject)
         val btnCancel = dialog.findViewById<Button>(R.id.btnCancelProject)
-        val projectTitleInput = dialog.findViewById<TextInputEditText>(R.id.projectTitleInput) // Assuming you have an EditText for the project title
+        val projectTitleInput = dialog.findViewById<TextInputEditText>(R.id.projectTitleInput)
 
         btnCreate.setOnClickListener {
-            val title = projectTitleInput.text.toString()
-            if (title != null) {
-                if (title.isNotEmpty()) {
+            val projectTitle = projectTitleInput.text.toString()
+            if (projectTitle != null) {
+                if (projectTitle.isNotEmpty()) {
 
                     val userId = intent.getIntExtra("USER_ID", -1)
 
                     // Call addProject from DatabaseHelper to add the project
-                    val projectId = dbHelper.addProject(title, "Pending", userId.toInt()) // Modify status as needed
+                    val projectId = dbHelper.addProject(projectTitle, "Pending", userId) // Modify status as needed
 
                     if (projectId != -1L) {
                         // Project added successfully

@@ -6,10 +6,12 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.example.taskup.DatabaseHelper
 import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
 import com.google.android.material.textfield.TextInputLayout
+import android.widget.ArrayAdapter
+import com.google.android.material.textfield.TextInputEditText
+
 
 class AddTaskActivity : AppCompatActivity() {
 
@@ -27,6 +29,17 @@ class AddTaskActivity : AppCompatActivity() {
         btnBack.setOnClickListener {
             this.onBackPressedDispatcher.onBackPressed()
         }
+
+        val userIdString = intent.getStringExtra("userId")
+        val userId = userIdString?.toIntOrNull() ?: -1 // Default value if conversion fails
+        projectsList = if (userId != -1) dbHelper.getProjects(userId) else emptyList()
+
+        // Initialize AutoCompleteTextView with project titles
+        val autoCompleteTextView = findViewById<AutoCompleteTextView>(R.id.selectProject)
+        val projectTitles = projectsList.map { it.projectTitle }.toTypedArray()
+
+        val adapter = ArrayAdapter(this, android.R.layout.simple_dropdown_item_1line, projectTitles)
+        autoCompleteTextView.setAdapter(adapter)
 
         // Status ChipGroup
         val chipGroupStatus = findViewById<ChipGroup>(R.id.chipGroupStatus)
@@ -58,26 +71,23 @@ class AddTaskActivity : AppCompatActivity() {
             }
         }
 
-        val autoCompleteTextView = findViewById<AutoCompleteTextView>(R.id.selectProject)
-        autoCompleteTextView.setOnItemClickListener { parent, view, position, id ->
-            val selectedProject = parent.adapter.getItem(position) as String
-            val selectedProjectObject = projectsList.find { it.title== selectedProject }
-
-
-
-            // Create Button
+        // Create Button
         val btnCreate = findViewById<Button>(R.id.btnCreate)
         btnCreate.setOnClickListener {
-            val title = findViewById<TextInputLayout>(R.id.taskName).editText?.text.toString()
-            val dueDate = findViewById<TextInputLayout>(R.id.dueDate).editText?.text.toString()
-            val time = findViewById<TextInputLayout>(R.id.selectTime).editText?.text.toString()
-            val description = findViewById<TextInputLayout>(R.id.desc).editText?.text.toString()
-            val status = selectedStatus
-            val priority = selectedPriority
+            val taskTitle = findViewById<TextInputEditText>(R.id.taskName).text.toString()
+            val taskDue = findViewById<TextInputEditText>(R.id.dueDate).text.toString()
+            val taskTime = findViewById<TextInputEditText>(R.id.selectTime).text.toString()
+            val taskDesc = findViewById<TextInputEditText>(R.id.desc).text.toString()
+            val taskStatus = selectedStatus
+            val taskPriority = selectedPriority
+
+            val autoCompleteTextView = findViewById<AutoCompleteTextView>(R.id.selectProject)
+            val selectedProject = autoCompleteTextView.text.toString()
+            val selectedProjectObject = projectsList.find { it.projectTitle == selectedProject }
             val projectId = selectedProjectObject?.projectId ?: -1
 
             // Add task to the database
-            val taskId = dbHelper.addTask(title, dueDate, time, description, status, priority, projectId)
+            val taskId = dbHelper.addTask(taskTitle, taskDue, taskTime, taskDesc, taskStatus, taskPriority, projectId)
             if (taskId != -1L) {
                 Toast.makeText(this, "Task added successfully", Toast.LENGTH_SHORT).show()
                 finish()
@@ -85,6 +95,6 @@ class AddTaskActivity : AppCompatActivity() {
                 Toast.makeText(this, "Failed to add task", Toast.LENGTH_SHORT).show()
             }
         }
-        }
     }
 }
+

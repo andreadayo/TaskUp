@@ -40,8 +40,8 @@ class ViewProjectActivity : AppCompatActivity() {
                 val project = projects[0] // Selecting the first project, change as needed
 
                 val projectId = project.projectId
-                val currentTitle = project.title
-                val currentStatus = project.status
+                val currentTitle = project.projectTitle
+                val currentStatus = project.projectStatus
 
                 showEditProjectDialog(projectId, currentTitle, currentStatus)
             } else {

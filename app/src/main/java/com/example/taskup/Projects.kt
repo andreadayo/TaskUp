@@ -2,7 +2,7 @@ package com.example.taskup
 
 data class Project(
     val projectId: Int,
-    val title: String,
-    val status: String,
+    val projectTitle: String,
+    val projectStatus: String,
     val userId: Int?
 )

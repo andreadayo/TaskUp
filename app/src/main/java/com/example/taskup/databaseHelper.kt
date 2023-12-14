@@ -5,8 +5,6 @@ import android.content.ContentValues
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
-
-
 class DatabaseHelper(context: Context) : SQLiteOpenHelper(
     context,
     DATABASE_NAME,
@@ -14,7 +12,7 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(
     DATABASE_VERSION
 ) {
     companion object {
-        private const val DATABASE_VERSION = 1
+        private const val DATABASE_VERSION = 3
         private const val DATABASE_NAME = "TaskUpDB"
 
         //Table Names
@@ -30,19 +28,19 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(
 
         //Projects Table
         private const val KEY_PROJECT_ID = "projectId"
-        private const val KEY_PROJECT_TITLE = "project_title"
-        private const val KEY_PROJECT_STATUS = "project_status"
-        private const val KEY_USER_ID = "user_id" // Foreign key column referencing users_id
+        private const val KEY_PROJECT_TITLE = "projectTitle"
+        private const val KEY_PROJECT_STATUS = "projectStatus"
+        private const val KEY_USER_ID = "userId" // Foreign key
 
         // Tasks Table
-        private const val KEY_TASK_ID = "task_id"
-        private const val KEY_TASK_TITLE = "task_title"
-        private const val KEY_TASK_DUE = "task_due"
-        private const val KEY_TASK_TIME = "task_time"
-        private const val KEY_TASK_DESC = "task_desc"
-        private const val KEY_TASK_STATUS = "task_status"
-        private const val KEY_TASK_PRIORITY = "task_priority"
-        private const val KEY_TASK_PROJECT_ID = "project_id" // Foreign key column referencing projects_project_id
+        private const val KEY_TASK_ID = "taskId"
+        private const val KEY_TASK_TITLE = "taskTitle"
+        private const val KEY_TASK_DUE = "taskDue"
+        private const val KEY_TASK_TIME = "taskTime"
+        private const val KEY_TASK_DESC = "taskDesc"
+        private const val KEY_TASK_STATUS = "taskStatus"
+        private const val KEY_TASK_PRIORITY = "taskPriority"
+        private const val KEY_TASK_PROJECT_ID = "projectId" // Foreign key
     }
     override fun onCreate(db: SQLiteDatabase?) {
         // Create users table
@@ -127,13 +125,11 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(
 
         return Pair(user, userId)
     }
-
-
-    fun addProject(title: String, status: String, userId: Int): Long {
+    fun addProject(projectTitle: String, projectStatus: String, userId: Int): Long {
         val db = this.writableDatabase
         val values = ContentValues().apply {
-            put(KEY_PROJECT_TITLE, title)
-            put(KEY_PROJECT_STATUS, status)
+            put(KEY_PROJECT_TITLE, projectTitle)
+            put(KEY_PROJECT_STATUS, projectStatus)
             put(KEY_USER_ID, userId)
         }
         val projectId = db.insert(TABLE_PROJECTS, null, values)
