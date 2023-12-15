@@ -304,5 +304,24 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(
         }
     }
 
+    fun getTotalTaskCount(): Int {
+        val db = this.readableDatabase
+        val query = "SELECT COUNT(*) FROM $TABLE_TASKS"
+        val cursor = db.rawQuery(query, null)
+        cursor.moveToFirst()
+        val count = cursor.getInt(0)
+        cursor.close()
+        return count
+    }
+
+    fun getTotalProjectCount(): Int {
+        val db = this.readableDatabase
+        val query = "SELECT COUNT(*) FROM $TABLE_PROJECTS"
+        val cursor = db.rawQuery(query, null)
+        cursor.moveToFirst()
+        val count = cursor.getInt(0)
+        cursor.close()
+        return count
+    }
 
 }
