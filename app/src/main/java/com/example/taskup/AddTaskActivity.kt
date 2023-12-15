@@ -42,8 +42,6 @@ class AddTaskActivity : AppCompatActivity() {
             this.onBackPressedDispatcher.onBackPressed()
         }
 
-
-
         // Due Date Calendar Picker
         dueDateEditText = findViewById(R.id.dueDate)
         dueDateLayout = findViewById(R.id.tfDueDate)
@@ -62,22 +60,20 @@ class AddTaskActivity : AppCompatActivity() {
 
         // Updated code to retrieve user ID as an integer
         val userId = intent.getIntExtra("USER_ID", -1)
-// Add this to check if userId is correctly received
+        // Add this to check if userId is correctly received
         Log.i("DatabaseDebug", "Received UserId: $userId")
 
-// Get all projects for the specific user ID
+        // Get all projects for the specific user ID
         val projectsList = dbHelper.getProjects(userId)
         Log.i("DatabaseDebug", "Requested UserId: $userId")
 
-// Extract titles from projects
+        // Extract titles from projects
         val projectTitles = projectsList.map { it.projectTitle }.toTypedArray()
 
-// Initialize AutoCompleteTextView with project titles
+        // Initialize AutoCompleteTextView with project titles
         val autoCompleteTextView = findViewById<AutoCompleteTextView>(R.id.selectProject)
         val projectAdapter = ArrayAdapter(this, R.layout.project_dropdown_item, projectTitles)
         autoCompleteTextView.setAdapter(projectAdapter)
-
-
 
         // Status ChipGroup
         val chipGroupStatus = findViewById<ChipGroup>(R.id.chipGroupStatus)
