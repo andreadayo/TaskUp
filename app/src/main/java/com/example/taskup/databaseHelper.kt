@@ -5,6 +5,8 @@ import android.content.ContentValues
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
+import android.util.Log
+
 class DatabaseHelper(context: Context) : SQLiteOpenHelper(
     context,
     DATABASE_NAME,
@@ -125,6 +127,20 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(
 
         return Pair(user, userId)
     }
+    @SuppressLint("Range")
+    fun getUserId(username: String): Int? {
+        val db = this.readableDatabase
+        val query = "SELECT $KEY_ID FROM $TABLE_USERS WHERE $KEY_USERNAME = ?"
+        val cursor = db.rawQuery(query, arrayOf(username))
+
+        var userId: Int? = null
+        cursor.use { cursor ->
+            if (cursor.moveToNext()) {
+                userId = cursor.getInt(cursor.getColumnIndex(KEY_ID))
+            }
+        }
+        return userId
+    }
     fun addProject(projectTitle: String, projectStatus: String, userId: Int): Long {
         val db = this.writableDatabase
         val values = ContentValues().apply {
@@ -143,7 +159,10 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(
         val query = "SELECT * FROM $TABLE_PROJECTS WHERE $KEY_USER_ID = ?"
         val cursor = db.rawQuery(query, arrayOf(userId.toString()))
 
+        Log.i("DatabaseDebug", "Query: $query, UserId: $userId")
+
         cursor.use { cursor ->
+            Log.i("DatabaseDebug", "Number of rows returned: ${cursor.count}")
             while (cursor.moveToNext()) {
                 val projectId = cursor.getInt(cursor.getColumnIndex(KEY_PROJECT_ID))
                 val title = cursor.getString(cursor.getColumnIndex(KEY_PROJECT_TITLE))
@@ -155,6 +174,9 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(
         }
         return projects
     }
+
+
+
     fun updateProject(projectId: Int, title: String, status: String): Boolean {
         val db = this.writableDatabase
         val values = ContentValues().apply {

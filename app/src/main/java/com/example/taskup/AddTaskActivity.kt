@@ -42,15 +42,7 @@ class AddTaskActivity : AppCompatActivity() {
             this.onBackPressedDispatcher.onBackPressed()
         }
 
-        val userIdString = intent.getStringExtra("userId")
-        val userId = userIdString?.toIntOrNull() ?: -1 // Default value if conversion fails
-        projectsList = if (userId != -1) dbHelper.getProjects(userId) else emptyList()
 
-        val projectsListDebug = dbHelper.getProjects(userId)
-
-        for (project in projectsListDebug) {
-            Log.i("ProjectDebug", "Project ID: ${project.projectId}, Title: ${project.projectTitle}, Status: ${project.projectStatus}")
-        }
 
         // Due Date Calendar Picker
         dueDateEditText = findViewById(R.id.dueDate)
@@ -68,12 +60,24 @@ class AddTaskActivity : AppCompatActivity() {
             showTimePickerDialog()
         }
 
-        // Initialize AutoCompleteTextView with project titles
-        val autoCompleteTextView = findViewById<AutoCompleteTextView>(R.id.selectProject)
+        // Updated code to retrieve user ID as an integer
+        val userId = intent.getIntExtra("USER_ID", -1)
+// Add this to check if userId is correctly received
+        Log.i("DatabaseDebug", "Received UserId: $userId")
+
+// Get all projects for the specific user ID
+        val projectsList = dbHelper.getProjects(userId)
+        Log.i("DatabaseDebug", "Requested UserId: $userId")
+
+// Extract titles from projects
         val projectTitles = projectsList.map { it.projectTitle }.toTypedArray()
 
-        val adapter = ArrayAdapter(this, android.R.layout.simple_dropdown_item_1line, projectTitles)
-        autoCompleteTextView.setAdapter(adapter)
+// Initialize AutoCompleteTextView with project titles
+        val autoCompleteTextView = findViewById<AutoCompleteTextView>(R.id.selectProject)
+        val projectAdapter = ArrayAdapter(this, R.layout.project_dropdown_item, projectTitles)
+        autoCompleteTextView.setAdapter(projectAdapter)
+
+
 
         // Status ChipGroup
         val chipGroupStatus = findViewById<ChipGroup>(R.id.chipGroupStatus)
@@ -101,12 +105,6 @@ class AddTaskActivity : AppCompatActivity() {
                     chipOngoing -> "Ongoing"
                     chipDone -> "Done"
                     else -> ""
-                }
-
-                val projectsListDebug = dbHelper.getProjects(userId)
-
-                for (project in projectsListDebug) {
-                    Log.i("ProjectDebug", "Project ID: ${project.projectId}, Title: ${project.projectTitle}, Status: ${project.projectStatus}")
                 }
 
                 Log.i("ChipDebug", "Selected chip: ${chip.text}, Checked set")

@@ -6,6 +6,7 @@ import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.view.Window
 import android.widget.Button
@@ -85,17 +86,27 @@ class AppActivity : AppCompatActivity() {
             showAddProjectDialog()
         }
 
-        val userId = intent.getStringExtra("userId")
-        // Redirect to Add Task
-        fabButtonNewTask.setOnClickListener {
-            val i = Intent(this,AddTaskActivity::class.java)
-            i.putExtra("USER_ID", userId)
-            startActivity(i)
-        }
         val username = intent.getStringExtra("USERNAME")
         val user = "$username"
         val tvUser = findViewById<TextView>(R.id.tvUser)
         tvUser.text = user
+
+        if (username != null) {
+            val userId = dbHelper.getUserId(username)
+
+            // Redirect to Add Task
+            fabButtonNewTask.setOnClickListener {
+                val i = Intent(this, AddTaskActivity::class.java)
+                i.putExtra("USER_ID", userId)
+                startActivity(i)
+
+                Log.i("DatabaseDebug", "Passed UserId: $userId")
+            }
+        } else {
+            Log.i("DatabaseDebug", "Username is null")
+            // Handle the case where the username is null
+        }
+
     }
 
     private fun showAddProjectDialog() {
