@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
 import android.widget.ImageView
 import android.widget.ListView
 import android.widget.TextView
@@ -51,7 +52,6 @@ class HomeFragment : Fragment() {
         val totalTaskCount = dbHelper.getTotalTaskCount(userId)
         val totalProjectCount = dbHelper.getTotalProjectCount(userId)
 
-
         totalTasks.text = totalTaskCount.toString()
         totalProjects.text = totalProjectCount.toString()
 
@@ -70,11 +70,8 @@ class HomeFragment : Fragment() {
 
         val listView: ListView = view.findViewById(R.id.listView)
 
-        // Show only the first three tasks
-        val tasksToShow = tasksList.take(3)
-
         // Create and set the adapter
-        val adapter = ListAdapter(requireContext(), tasksToShow)
+        val adapter = ListAdapter(requireContext(), tasksList)
         listView.adapter = adapter
 
         // Calculate the total height of the items
@@ -100,6 +97,7 @@ class HomeFragment : Fragment() {
         return totalHeight
     }
 }
+
 
 
 

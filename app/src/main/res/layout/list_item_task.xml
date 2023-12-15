@@ -45,15 +45,7 @@
                 android:textColor="?attr/colorOnBackground"
                 />
 
-            <!-- Task Due Date -->
-            <TextView
-                android:id="@+id/tvTaskDueDate"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="12 November 2023"
-                style="@style/TextAppearance.JakartaSans.Medium12"
-                android:textColor="?attr/colorOutline"
-                />
+
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -95,6 +87,27 @@
                     />
 
             </LinearLayout>
+
+            <!-- Task Due Date -->
+            <TextView
+                android:id="@+id/tvTaskDescription"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Description goes here"
+                android:textStyle="italic"
+                style="@style/TextAppearance.JakartaSans.Medium12"
+                android:textColor="?attr/colorOutline"
+                />
+
+            <!-- Task Due Date -->
+            <TextView
+                android:id="@+id/tvTaskDueDate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="12 November 2023"
+                style="@style/TextAppearance.JakartaSans.Medium12"
+                android:textColor="?attr/colorOnBackground"
+                />
 
         </LinearLayout>
 
