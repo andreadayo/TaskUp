@@ -1,6 +1,9 @@
 package com.example.taskup
 
+import android.app.DatePickerDialog
+import android.app.TimePickerDialog
 import android.os.Bundle
+import android.util.Log
 import android.widget.AutoCompleteTextView
 import android.widget.Button
 import android.widget.ImageView
@@ -11,12 +14,21 @@ import com.google.android.material.chip.ChipGroup
 import com.google.android.material.textfield.TextInputLayout
 import android.widget.ArrayAdapter
 import com.google.android.material.textfield.TextInputEditText
+import java.text.SimpleDateFormat
+import java.util.Calendar
+import java.util.Date
+import java.util.Locale
 
 
 class AddTaskActivity : AppCompatActivity() {
 
     private lateinit var dbHelper: DatabaseHelper
     private lateinit var projectsList: List<Project>
+    private lateinit var dueDateEditText: TextInputEditText
+    private lateinit var dueDateLayout: TextInputLayout
+    private lateinit var selectTimeEditText: TextInputEditText
+    private lateinit var timeLayout: TextInputLayout
+    private val calendar: Calendar = Calendar.getInstance()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,6 +46,28 @@ class AddTaskActivity : AppCompatActivity() {
         val userId = userIdString?.toIntOrNull() ?: -1 // Default value if conversion fails
         projectsList = if (userId != -1) dbHelper.getProjects(userId) else emptyList()
 
+        val projectsListDebug = dbHelper.getProjects(userId)
+
+        for (project in projectsListDebug) {
+            Log.i("ProjectDebug", "Project ID: ${project.projectId}, Title: ${project.projectTitle}, Status: ${project.projectStatus}")
+        }
+
+        // Due Date Calendar Picker
+        dueDateEditText = findViewById(R.id.dueDate)
+        dueDateLayout = findViewById(R.id.tfDueDate)
+
+        dueDateEditText.setOnClickListener {
+            showDatePickerDialog()
+        }
+
+        // Time Picker
+        selectTimeEditText = findViewById(R.id.selectTime)
+        timeLayout = findViewById(R.id.tfTime)
+
+        selectTimeEditText.setOnClickListener {
+            showTimePickerDialog()
+        }
+
         // Initialize AutoCompleteTextView with project titles
         val autoCompleteTextView = findViewById<AutoCompleteTextView>(R.id.selectProject)
         val projectTitles = projectsList.map { it.projectTitle }.toTypedArray()
@@ -44,30 +78,70 @@ class AddTaskActivity : AppCompatActivity() {
         // Status ChipGroup
         val chipGroupStatus = findViewById<ChipGroup>(R.id.chipGroupStatus)
         var selectedStatus: String = ""
-        chipGroupStatus.setOnCheckedChangeListener { group, checkedId ->
-            val chip: Chip? = findViewById(checkedId)
-            chip?.let {
-                selectedStatus = when (chip.text) {
-                    "Pending" -> "Pending"
-                    "Ongoing" -> "Ongoing"
-                    "Done" -> "Done"
+
+        val chipPending = findViewById<Chip>(R.id.chipPending)
+        val chipOngoing = findViewById<Chip>(R.id.chipOngoing)
+        val chipDone = findViewById<Chip>(R.id.chipDone)
+
+        val statusChips = listOf(chipPending, chipOngoing, chipDone)
+
+        for (chip in statusChips) {
+            chip.setOnClickListener {
+                // Uncheck all other chips
+                for (otherChip in statusChips) {
+                    otherChip.isChecked = false
+                }
+
+                // Check the selected chip
+                chip.isChecked = true
+
+                // Update the selected status
+                selectedStatus = when (chip) {
+                    chipPending -> "Pending"
+                    chipOngoing -> "Ongoing"
+                    chipDone -> "Done"
                     else -> ""
                 }
+
+                val projectsListDebug = dbHelper.getProjects(userId)
+
+                for (project in projectsListDebug) {
+                    Log.i("ProjectDebug", "Project ID: ${project.projectId}, Title: ${project.projectTitle}, Status: ${project.projectStatus}")
+                }
+
+                Log.i("ChipDebug", "Selected chip: ${chip.text}, Checked set")
             }
         }
 
         // Priority ChipGroup
         val chipGroupPriority = findViewById<ChipGroup>(R.id.chipGroupPriority)
         var selectedPriority: String = ""
-        chipGroupPriority.setOnCheckedChangeListener { group, checkedId ->
-            val chip: Chip? = findViewById(checkedId)
-            chip?.let {
-                selectedPriority = when (chip.text) {
-                    "Low" -> "Low"
-                    "Moderate" -> "Moderate"
-                    "High" -> "High"
+
+        val chipLow = findViewById<Chip>(R.id.chipLow)
+        val chipModerate = findViewById<Chip>(R.id.chipModerate)
+        val chipHigh = findViewById<Chip>(R.id.chipHigh)
+
+        val priorityChips = listOf(chipLow, chipModerate, chipHigh)
+
+        for (chip in priorityChips) {
+            chip.setOnClickListener {
+                // Uncheck all other chips
+                for (otherChip in priorityChips) {
+                    otherChip.isChecked = false
+                }
+
+                // Check the selected chip
+                chip.isChecked = true
+
+                // Update the selected status
+                selectedPriority = when (chip) {
+                    chipLow -> "Low"
+                    chipModerate -> "Moderate"
+                    chipHigh -> "High"
                     else -> ""
                 }
+
+                Log.i("ChipDebug", "Selected chip: ${chip.text}, Checked set")
             }
         }
 
@@ -95,6 +169,53 @@ class AddTaskActivity : AppCompatActivity() {
                 Toast.makeText(this, "Failed to add task", Toast.LENGTH_SHORT).show()
             }
         }
+    }
+
+    private fun showDatePickerDialog() {
+        val datePickerDialog = DatePickerDialog(
+            this,
+            DatePickerDialog.OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
+                // Update the TextInputEditText with the selected date
+                val selectedDate = Calendar.getInstance()
+                selectedDate.set(year, monthOfYear, dayOfMonth)
+                updateDueDate(selectedDate.time)
+            },
+            calendar.get(Calendar.YEAR),
+            calendar.get(Calendar.MONTH),
+            calendar.get(Calendar.DAY_OF_MONTH)
+        )
+
+        datePickerDialog.show()
+    }
+
+    private fun updateDueDate(date: Date) {
+        val dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+        val formattedDate = dateFormat.format(date)
+        dueDateEditText.setText(formattedDate)
+    }
+
+    private fun showTimePickerDialog() {
+        val timePickerDialog = TimePickerDialog(
+            this,
+            TimePickerDialog.OnTimeSetListener { view, hourOfDay, minute ->
+                // Update the TextInputEditText with the selected time
+                val selectedTime = Calendar.getInstance()
+                selectedTime.set(Calendar.HOUR_OF_DAY, hourOfDay)
+                selectedTime.set(Calendar.MINUTE, minute)
+                updateSelectedTime(selectedTime.time)
+            },
+            calendar.get(Calendar.HOUR_OF_DAY),
+            calendar.get(Calendar.MINUTE),
+            false // Set to true for 24-hour format
+        )
+
+        timePickerDialog.show()
+    }
+
+    private fun updateSelectedTime(date: Date) {
+        val timeFormat = SimpleDateFormat("HH:mm", Locale.getDefault())
+        val formattedTime = timeFormat.format(date)
+        selectTimeEditText.setText(formattedTime)
     }
 }
 
