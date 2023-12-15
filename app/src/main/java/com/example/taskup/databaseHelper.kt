@@ -225,7 +225,7 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(
     SELECT tasks.*, projects.${KEY_USER_ID} AS user_id
     FROM $TABLE_TASKS AS tasks
     JOIN $TABLE_PROJECTS AS projects ON tasks.${KEY_TASK_PROJECT_ID} = projects.${KEY_PROJECT_ID}
-    WHERE projects.${KEY_USER_ID} = ?
+    WHERE projects.${KEY_USER_ID} = ? AND tasks.${KEY_TASK_STATUS} != 'Done'
 """.trimIndent()
 
         val cursor = db.rawQuery(query, arrayOf(userId.toString()))
@@ -301,26 +301,53 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(
             } else {
                 null
             }
-        }
-        
-    fun getTotalTaskCount(): Int {
+        }}
+
+    fun getTotalTaskCount(userId: Int): Int {
         val db = this.readableDatabase
-        val query = "SELECT COUNT(*) FROM $TABLE_TASKS"
-        val cursor = db.rawQuery(query, null)
-        cursor.moveToFirst()
-        val count = cursor.getInt(0)
-        cursor.close()
-        return count
+        val query = """
+        SELECT COUNT(*)
+        FROM $TABLE_TASKS AS tasks
+        JOIN $TABLE_PROJECTS AS projects ON tasks.${KEY_TASK_PROJECT_ID} = projects.${KEY_PROJECT_ID}
+        WHERE projects.${KEY_USER_ID} = ? AND tasks.${KEY_TASK_STATUS} != 'Done'
+    """.trimIndent()
+
+        val cursor = db.rawQuery(query, arrayOf(userId.toString()))
+
+        cursor.use { cursor ->
+            if (cursor.moveToFirst()) {
+                return cursor.getInt(0)
+            }
+        }
+
+        return 0
     }
 
-    fun getTotalProjectCount(): Int {
+    fun getTotalProjectCount(userId: Int): Int {
         val db = this.readableDatabase
-        val query = "SELECT COUNT(*) FROM $TABLE_PROJECTS"
-        val cursor = db.rawQuery(query, null)
-        cursor.moveToFirst()
-        val count = cursor.getInt(0)
-        cursor.close()
-        return count
+        val query = "SELECT COUNT(*) FROM $TABLE_PROJECTS WHERE $KEY_USER_ID = ?"
+        val cursor = db.rawQuery(query, arrayOf(userId.toString()))
+
+        cursor.use { cursor ->
+            if (cursor.moveToFirst()) {
+                return cursor.getInt(0)
+            }
+        }
+
+        return 0
+    }
+
+
+    fun updateTaskStatus(taskId: Int, newStatus: String) {
+        val db = this.writableDatabase
+        val values = ContentValues()
+        values.put(KEY_TASK_STATUS, newStatus)
+
+        // Update the task with the specified taskId
+        db.update(TABLE_TASKS, values, "$KEY_TASK_ID = ?", arrayOf(taskId.toString()))
+
+        // Close the database
+        db.close()
     }
 
 

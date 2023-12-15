@@ -18,6 +18,7 @@ class HomeFragment : Fragment() {
     private lateinit var dbHelper: DatabaseHelper
     private lateinit var sharedPreferences: SharedPreferences
     private lateinit var tasksList: List<Task>
+    private var userId: Int = -1
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,16 +30,12 @@ class HomeFragment : Fragment() {
         dbHelper = DatabaseHelper(requireContext())
 
         // Retrieve user ID from SharedPreferences
-        val userId = sharedPreferences.getInt("userId", -1)
+        userId = sharedPreferences.getInt("userId", -1)
 
         // Retrieve projects list from the database
         tasksList = dbHelper.getTasks(userId)
     }
-    @SuppressLint("MissingInflatedId")
 
-
-class HomeFragment : Fragment() {
-    private lateinit var dbHelper: DatabaseHelper
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -46,19 +43,13 @@ class HomeFragment : Fragment() {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_home, container, false)
 
-
         val totalTasks = view.findViewById<TextView>(R.id.totalTasks)
         val totalProjects = view.findViewById<TextView>(R.id.totalProjects)
 
         dbHelper = DatabaseHelper(requireContext())
 
-        val totalProjects = view.findViewById<TextView>(R.id.totalProjects)
-        val totalTasks = view.findViewById<TextView>(R.id.totalTasks)
-
-        dbHelper = DatabaseHelper(requireContext())
-
-        val totalTaskCount = dbHelper.getTotalTaskCount()
-        val totalProjectCount = dbHelper.getTotalProjectCount()
+        val totalTaskCount = dbHelper.getTotalTaskCount(userId)
+        val totalProjectCount = dbHelper.getTotalProjectCount(userId)
 
 
         totalTasks.text = totalTaskCount.toString()
@@ -109,6 +100,7 @@ class HomeFragment : Fragment() {
         return totalHeight
     }
 }
+
 
 
 
