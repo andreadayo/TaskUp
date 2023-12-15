@@ -9,6 +9,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.ListView
+import android.widget.TextView
+import com.google.android.material.textfield.TextInputLayout
 
 data class TaskData(
     val projectCategory: String,
@@ -19,6 +21,7 @@ data class TaskData(
 )
 
 class HomeFragment : Fragment() {
+    private lateinit var dbHelper: DatabaseHelper
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -26,6 +29,17 @@ class HomeFragment : Fragment() {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_home, container, false)
 
+        dbHelper = DatabaseHelper(requireContext())
+
+        val totalProjects = view.findViewById<TextView>(R.id.totalProjects)
+        val totalTasks = view.findViewById<TextView>(R.id.totalTasks)
+        dbHelper = DatabaseHelper(requireContext())
+
+        val totalTaskCount = dbHelper.getTotalTaskCount()
+        val totalProjectCount = dbHelper.getTotalProjectCount()
+
+        totalProjects.text = totalProjectCount.toString()
+        totalTasks.text = totalTaskCount.toString()
 
         // Profile Link
         val btnProfile = view.findViewById<ImageView>(R.id.btnProfile)
