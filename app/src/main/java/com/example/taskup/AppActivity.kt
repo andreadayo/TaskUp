@@ -125,47 +125,13 @@ class AppActivity : AppCompatActivity() {
         // Access the root view of the dialog
         val dialogView = dialog.findViewById<View>(R.id.dialogAddProject)
 
-        // Color ChipGroup
-        val chipGroupColor = dialogView.findViewById<ChipGroup>(R.id.chipColor)
-        var selectedColor: String = ""
-
-        val chipBlue = dialogView.findViewById<Chip>(R.id.chipBlue)
-        val chipPurple = dialogView.findViewById<Chip>(R.id.chipPurple)
-        val chipPink = dialogView.findViewById<Chip>(R.id.chipPink)
-        val chipYellow = dialogView.findViewById<Chip>(R.id.chipYellow)
-
-        val colorChips = listOf(chipBlue, chipPurple, chipPink, chipYellow)
-
-        for (chip in colorChips) {
-            chip.setOnClickListener {
-                // Uncheck all other chips
-                for (otherChip in colorChips) {
-                    otherChip?.isChecked = false
-                }
-
-                // Check the selected chip
-                chip?.isChecked = true
-
-                // Update the selected status
-                selectedColor = when (chip) {
-                    chipBlue -> "Blue"
-                    chipPurple -> "Purple"
-                    chipPink -> "Pink"
-                    chipYellow -> "Yellow"
-                    else -> ""
-                }
-
-                Log.i("ChipDebug", "Selected chip: ${chip?.text}, Checked set")
-            }
-        }
-
         btnCreate.setOnClickListener {
             val projectTitle = projectTitleInput.text.toString()
             if (projectTitle.isNotEmpty()) {
                 val userId = intent.getIntExtra("USER_ID", -1)
 
                 // Call addProject from DatabaseHelper to add the project
-                val projectId = dbHelper.addProject(projectTitle, selectedColor, userId)
+                val projectId = dbHelper.addProject(projectTitle, "Color", userId)
 
                 if (projectId != -1L) {
                     // Project added successfully

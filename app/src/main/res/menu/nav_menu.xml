@@ -11,7 +11,11 @@
         android:title="Projects" />
     <item
         android:id="@+id/tasksFragment"
-        android:icon="@drawable/baseline_task_alt_24"
+        android:icon="@drawable/baseline_checklist_24"
         android:title="Tasks" />
+    <item
+        android:id="@+id/calendarFragment"
+        android:icon="@drawable/baseline_task_alt_24"
+        android:title="Done" />
 
 </menu>

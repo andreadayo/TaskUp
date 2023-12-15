@@ -253,6 +253,43 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(
         }
         return tasks
     }
+    @SuppressLint("Range")
+    fun getDoneTasks(userId: Int): List<Task> {
+        val tasks = mutableListOf<Task>()
+        val db = this.readableDatabase
+        val query = """
+    SELECT tasks.*, projects.${KEY_USER_ID} AS user_id
+    FROM $TABLE_TASKS AS tasks
+    JOIN $TABLE_PROJECTS AS projects ON tasks.${KEY_TASK_PROJECT_ID} = projects.${KEY_PROJECT_ID}
+    WHERE projects.${KEY_USER_ID} = ? AND tasks.${KEY_TASK_STATUS} = 'Done'
+""".trimIndent()
+
+        val cursor = db.rawQuery(query, arrayOf(userId.toString()))
+
+        cursor.use { cursor ->
+            while (cursor.moveToNext()) {
+                val taskId = cursor.getInt(cursor.getColumnIndex(KEY_TASK_ID))
+                val title = cursor.getString(cursor.getColumnIndex(KEY_TASK_TITLE))
+                val due = cursor.getString(cursor.getColumnIndex(KEY_TASK_DUE))
+                val time = cursor.getString(cursor.getColumnIndex(KEY_TASK_TIME))
+                val description = cursor.getString(cursor.getColumnIndex(KEY_TASK_DESC))
+                val status = cursor.getString(cursor.getColumnIndex(KEY_TASK_STATUS))
+                val priority = cursor.getString(cursor.getColumnIndex(KEY_TASK_PRIORITY))
+                val projectId = cursor.getInt(cursor.getColumnIndex(KEY_TASK_PROJECT_ID))
+
+                // Assuming you have a "user_id" column in the result set
+                val userIdFromProject = cursor.getInt(cursor.getColumnIndex("user_id"))
+
+                // Verify if userId matches
+                if (userId == userIdFromProject) {
+                    val task = Task(taskId, title, due, time, description, status, priority, projectId)
+                    tasks.add(task)
+                }
+            }
+        }
+        return tasks
+    }
+
     fun updateTask(taskId: Int, title: String, due: String, time: String, desc: String, status: String, priority: String): Boolean {
         val db = this.writableDatabase
         val values = ContentValues().apply {

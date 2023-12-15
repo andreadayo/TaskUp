@@ -22,44 +22,22 @@
             tools:layout_editor_absoluteY="1dp">
 
             <TextView
-                android:id="@+id/tvTitle"
+                android:id="@+id/tvProjectName"
                 style="@style/TextAppearance.Kollektif.Bold24"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="16dp"
-                android:text="Calendar"
-                android:textAlignment="center"
-                android:textColor="?attr/colorOnBackground" />
-
-            <com.applandeo.materialcalendarview.CalendarView
-                android:id="@+id/calendarView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="16dp"
-                app:headerColor="?attr/colorOnBackground"
-                app:headerLabelColor="?attr/colorSurface"
-                app:todayLabelColor="?attr/colorTertiary"/>
-
-            <TextView
-                android:id="@+id/tvDateSelected"
-                style="@style/TextAppearance.Kollektif.Bold18"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
-                android:layout_marginBottom="16dp"
-                android:text="Thursday, 16 November 2023"
+                android:text="Accomplished Tasks"
                 android:textAlignment="center"
                 android:textColor="?attr/colorOnBackground" />
 
             <ListView
-                android:id="@+id/listViewToday"
+                android:id="@+id/listView"
                 android:layout_width="match_parent"
                 android:layout_height="300dp"
                 android:layout_marginBottom="24dp"
                 android:divider="@android:color/transparent"
                 android:dividerHeight="24dp"/>
-
-
 
         </LinearLayout>
 
