@@ -93,7 +93,7 @@
                         android:padding="16dp">
 
                         <TextView
-                            android:id="@+id/totalTasks"
+                            android:id="@+id/totalProjects"
                             style="@style/TextAppearance.Kollektif.Bold32"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -107,7 +107,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="2dp"
-                            android:text="total tasks"
+                            android:text="total projects"
                             android:textColor="?attr/colorOnSecondary" />
 
                     </LinearLayout>
@@ -130,7 +130,7 @@
                         android:padding="16dp">
 
                         <TextView
-                            android:id="@+id/totalProjects"
+                            android:id="@+id/totalTasks"
                             style="@style/TextAppearance.Kollektif.Bold32"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -144,7 +144,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="2dp"
-                            android:text="total projects"
+                            android:text="total tasks"
                             android:textColor="?attr/colorOnSecondary" />
 
                     </LinearLayout>
