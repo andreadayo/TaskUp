@@ -218,11 +218,17 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(
         return id
     }
     @SuppressLint("Range")
-    fun getTasks(projectId: Int): List<Task> {
+    fun getTasks(userId: Int): List<Task> {
         val tasks = mutableListOf<Task>()
         val db = this.readableDatabase
-        val query = "SELECT * FROM $TABLE_TASKS WHERE $KEY_TASK_PROJECT_ID = ?"
-        val cursor = db.rawQuery(query, arrayOf(projectId.toString()))
+        val query = """
+    SELECT tasks.*, projects.${KEY_USER_ID} AS user_id
+    FROM $TABLE_TASKS AS tasks
+    JOIN $TABLE_PROJECTS AS projects ON tasks.${KEY_TASK_PROJECT_ID} = projects.${KEY_PROJECT_ID}
+    WHERE projects.${KEY_USER_ID} = ?
+""".trimIndent()
+
+        val cursor = db.rawQuery(query, arrayOf(userId.toString()))
 
         cursor.use { cursor ->
             while (cursor.moveToNext()) {
@@ -233,9 +239,16 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(
                 val description = cursor.getString(cursor.getColumnIndex(KEY_TASK_DESC))
                 val status = cursor.getString(cursor.getColumnIndex(KEY_TASK_STATUS))
                 val priority = cursor.getString(cursor.getColumnIndex(KEY_TASK_PRIORITY))
+                val projectId = cursor.getInt(cursor.getColumnIndex(KEY_TASK_PROJECT_ID))
 
-                val task = Task(taskId, title, due, time, description, status, priority, projectId)
-                tasks.add(task)
+                // Assuming you have a "user_id" column in the result set
+                val userIdFromProject = cursor.getInt(cursor.getColumnIndex("user_id"))
+
+                // Verify if userId matches
+                if (userId == userIdFromProject) {
+                    val task = Task(taskId, title, due, time, description, status, priority, projectId)
+                    tasks.add(task)
+                }
             }
         }
         return tasks

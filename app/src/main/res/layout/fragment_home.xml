@@ -168,15 +168,6 @@
                     android:text="Projects"
                     android:textColor="?attr/colorOnBackground" />
 
-                <TextView
-                    android:id="@+id/tvProjectsSeeMore"
-                    style="@style/TextAppearance.JakartaSans.SemiBold12"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:text="See More"
-                    android:textColor="?attr/colorOutline" />
-
             </LinearLayout>
 
             <com.google.android.flexbox.FlexboxLayout
@@ -212,16 +203,6 @@
                     android:layout_weight="1"
                     android:text="Tasks"
                     android:textColor="?attr/colorOnBackground" />
-
-                <TextView
-                    android:id="@+id/tvTasksSeeMore"
-                    style="@style/TextAppearance.JakartaSans.SemiBold12"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:text="See More"
-                    android:textColor="?attr/colorOutline" />
-
             </LinearLayout>
 
             <ListView

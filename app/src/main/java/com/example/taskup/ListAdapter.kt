@@ -9,7 +9,7 @@ import android.widget.ArrayAdapter
 import android.widget.BaseAdapter
 import android.widget.TextView
 
-class ListAdapter(private val context: Context, private val data: List<TaskData>) : BaseAdapter() {
+class ListAdapter(private val context: Context, private val data: List<Task>) : BaseAdapter() {
 
     override fun getCount(): Int {
         return data.size
@@ -24,7 +24,11 @@ class ListAdapter(private val context: Context, private val data: List<TaskData>
     }
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
-        val view: View = convertView ?: LayoutInflater.from(context).inflate(R.layout.list_item_task, parent, false)
+        val view: View = convertView ?: LayoutInflater.from(context).inflate(
+            R.layout.list_item_task,
+            parent,
+            false
+        )
 
         // val taskProject: TextView = view.findViewById(R.id.projectTheme) // should be view - will be fixed when backend is integrated
         val taskName: TextView = view.findViewById(R.id.tvTaskName)
@@ -34,10 +38,10 @@ class ListAdapter(private val context: Context, private val data: List<TaskData>
 
         val taskData = data[position]
         // taskProject.text = taskData.projectCategory
-        taskName.text = taskData.taskName
-        taskDueDate.text = taskData.dueDate
-        taskStatus.text = taskData.status
-        taskPriority.text = taskData.priority
+        taskName.text = taskData.taskTitle
+        taskDueDate.text = taskData.taskDue
+        taskStatus.text = taskData.taskStatus
+        taskPriority.text = taskData.taskPriority
 
         return view
     }
