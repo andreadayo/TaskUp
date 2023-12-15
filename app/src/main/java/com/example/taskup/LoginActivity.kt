@@ -1,5 +1,6 @@
 package com.example.taskup
 
+import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -36,6 +37,9 @@ class LoginActivity : AppCompatActivity() {
                 val (user, userId) = dbHelper.getUser(username, password)
 
                 if (user != null && userId != null) {
+                    // Save user information in SharedPreferences
+                    saveUserInformation(username, userId)
+
                     // User authenticated, navigate to AppActivity
                     val intent = Intent(this, AppActivity::class.java)
                     intent.putExtra("USER_ID", userId) // Pass the user ID
@@ -79,5 +83,14 @@ class LoginActivity : AppCompatActivity() {
         dbHelper.close() // Close the database when the activity is destroyed
         super.onDestroy()
     }
+
+    private fun saveUserInformation(username: String, userId: Int) {
+        val sharedPreferences = getSharedPreferences("MyPreferences", Context.MODE_PRIVATE)
+        val editor = sharedPreferences.edit()
+        editor.putString("username", username)
+        editor.putInt("userId", userId)
+        editor.apply()
+    }
+
 }
 
