@@ -24,15 +24,6 @@
             android:text="Name"
             android:textColor="?attr/colorOnPrimaryContainer" />
 
-        <TextView
-            android:id="@+id/tvProjectCount"
-            style="@style/TextAppearance.JakartaSans.Medium12"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="2dp"
-            android:text="12 tasks"
-            android:textColor="?attr/colorOutline" />
-
     </LinearLayout>
 
 </androidx.cardview.widget.CardView>

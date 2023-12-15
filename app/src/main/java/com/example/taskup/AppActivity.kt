@@ -20,6 +20,8 @@ import com.example.taskup.databinding.ActivityAppBinding
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.transition.AutoTransition
 import androidx.transition.TransitionManager
+import com.google.android.material.chip.Chip
+import com.google.android.material.chip.ChipGroup
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.textfield.TextInputEditText
@@ -120,28 +122,62 @@ class AppActivity : AppCompatActivity() {
         val btnCancel = dialog.findViewById<Button>(R.id.btnCancelProject)
         val projectTitleInput = dialog.findViewById<TextInputEditText>(R.id.projectTitleInput)
 
+        // Access the root view of the dialog
+        val dialogView = dialog.findViewById<View>(R.id.dialogAddProject)
+
+        // Color ChipGroup
+        val chipGroupColor = dialogView.findViewById<ChipGroup>(R.id.chipColor)
+        var selectedColor: String = ""
+
+        val chipBlue = dialogView.findViewById<Chip>(R.id.chipBlue)
+        val chipPurple = dialogView.findViewById<Chip>(R.id.chipPurple)
+        val chipPink = dialogView.findViewById<Chip>(R.id.chipPink)
+        val chipYellow = dialogView.findViewById<Chip>(R.id.chipYellow)
+
+        val colorChips = listOf(chipBlue, chipPurple, chipPink, chipYellow)
+
+        for (chip in colorChips) {
+            chip.setOnClickListener {
+                // Uncheck all other chips
+                for (otherChip in colorChips) {
+                    otherChip?.isChecked = false
+                }
+
+                // Check the selected chip
+                chip?.isChecked = true
+
+                // Update the selected status
+                selectedColor = when (chip) {
+                    chipBlue -> "Blue"
+                    chipPurple -> "Purple"
+                    chipPink -> "Pink"
+                    chipYellow -> "Yellow"
+                    else -> ""
+                }
+
+                Log.i("ChipDebug", "Selected chip: ${chip?.text}, Checked set")
+            }
+        }
+
         btnCreate.setOnClickListener {
             val projectTitle = projectTitleInput.text.toString()
-            if (projectTitle != null) {
-                if (projectTitle.isNotEmpty()) {
+            if (projectTitle.isNotEmpty()) {
+                val userId = intent.getIntExtra("USER_ID", -1)
 
-                    val userId = intent.getIntExtra("USER_ID", -1)
+                // Call addProject from DatabaseHelper to add the project
+                val projectId = dbHelper.addProject(projectTitle, selectedColor, userId)
 
-                    // Call addProject from DatabaseHelper to add the project
-                    val projectId = dbHelper.addProject(projectTitle, "Pending", userId) // Modify status as needed
-
-                    if (projectId != -1L) {
-                        // Project added successfully
-                        Toast.makeText(this, "Project added!", Toast.LENGTH_SHORT).show()
-                    } else {
-                        // Failed to add project
-                        Toast.makeText(this, "Failed to add project!", Toast.LENGTH_SHORT).show()
-                    }
-
-                    dialog.dismiss()
+                if (projectId != -1L) {
+                    // Project added successfully
+                    Toast.makeText(this, "Project added!", Toast.LENGTH_SHORT).show()
                 } else {
-                    Toast.makeText(this, "Please enter a project title", Toast.LENGTH_SHORT).show()
+                    // Failed to add project
+                    Toast.makeText(this, "Failed to add project!", Toast.LENGTH_SHORT).show()
                 }
+
+                dialog.dismiss()
+            } else {
+                Toast.makeText(this, "Please enter a project title", Toast.LENGTH_SHORT).show()
             }
         }
 
@@ -151,6 +187,7 @@ class AppActivity : AppCompatActivity() {
 
         dialog.show()
     }
+
 
 
 }
