@@ -222,11 +222,11 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(
         val tasks = mutableListOf<Task>()
         val db = this.readableDatabase
         val query = """
-        SELECT tasks.*, projects.${KEY_USER_ID} AS user_id
-        FROM $TABLE_TASKS AS tasks
-        JOIN $TABLE_PROJECTS AS projects ON tasks.${KEY_TASK_PROJECT_ID} = projects.${KEY_PROJECT_ID}
-        WHERE projects.${KEY_USER_ID} = ? AND tasks.${KEY_TASK_STATUS} != 'Done'
-    """.trimIndent()
+    SELECT tasks.*, projects.${KEY_USER_ID} AS user_id
+    FROM $TABLE_TASKS AS tasks
+    JOIN $TABLE_PROJECTS AS projects ON tasks.${KEY_TASK_PROJECT_ID} = projects.${KEY_PROJECT_ID}
+    WHERE projects.${KEY_USER_ID} = ?
+""".trimIndent()
 
         val cursor = db.rawQuery(query, arrayOf(userId.toString()))
 
@@ -253,7 +253,6 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(
         }
         return tasks
     }
-
     fun updateTask(taskId: Int, title: String, due: String, time: String, desc: String, status: String, priority: String): Boolean {
         val db = this.writableDatabase
         val values = ContentValues().apply {
@@ -303,18 +302,6 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(
                 null
             }
         }
-    }
-
-    fun updateTaskStatus(taskId: Int, newStatus: String) {
-        val db = this.writableDatabase
-        val values = ContentValues()
-        values.put(KEY_TASK_STATUS, newStatus)
-
-        // Update the task with the specified taskId
-        db.update(TABLE_TASKS, values, "$KEY_TASK_ID = ?", arrayOf(taskId.toString()))
-
-        // Close the database
-        db.close()
     }
 
 

@@ -1,5 +1,6 @@
 package com.example.taskup
 
+import android.annotation.SuppressLint
 import android.content.ClipData
 import android.content.Context
 import android.content.Intent
@@ -11,6 +12,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.ListView
+import android.widget.TextView
+import com.google.android.material.textfield.TextInputLayout
 
 class HomeFragment : Fragment() {
     private lateinit var dbHelper: DatabaseHelper
@@ -32,12 +35,24 @@ class HomeFragment : Fragment() {
         // Retrieve projects list from the database
         tasksList = dbHelper.getTasks(userId)
     }
+    @SuppressLint("MissingInflatedId")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_home, container, false)
+
+        val totalTasks = view.findViewById<TextView>(R.id.totalTasks)
+        val totalProjects = view.findViewById<TextView>(R.id.totalProjects)
+        dbHelper = DatabaseHelper(requireContext())
+
+        val totalTaskCount = dbHelper.getTotalTaskCount()
+        val totalProjectCount = dbHelper.getTotalProjectCount()
+
+        totalTasks.text = totalTaskCount.toString()
+        totalProjects.text = totalProjectCount.toString()
+
 
         // Profile Link
         val btnProfile = view.findViewById<ImageView>(R.id.btnProfile)
