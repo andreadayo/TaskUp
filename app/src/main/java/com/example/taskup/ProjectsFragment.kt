@@ -4,18 +4,20 @@ import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
-import android.widget.Button
 import android.widget.ListView
-import androidx.cardview.widget.CardView
-import androidx.fragment.app.FragmentManager
 import com.google.android.flexbox.FlexboxLayout
 
-class ProjectsFragment : Fragment() {
+interface OnProjectItemClickListener {
+    fun onProjectItemClick(project: Project)
+}
+
+class ProjectsFragment : Fragment(), OnProjectItemClickListener {
 
     private lateinit var dbHelper: DatabaseHelper
     private lateinit var sharedPreferences: SharedPreferences
@@ -47,22 +49,13 @@ class ProjectsFragment : Fragment() {
         val listView: ListView = view.findViewById(R.id.projectListView)
 
         // Create and set the adapter
-        val adapter = ListAdapterProject(requireContext(), projectsList)
+        val adapter = ListAdapterProject(requireContext(), projectsList, this)
         listView.adapter = adapter
 
         // Set item click listener
         listView.setOnItemClickListener { _, _, position, _ ->
-            // Get the selected project data
             val selectedProject = projectsList[position]
-
-            // Start ViewProjectActivity with relevant information
-            val intent = Intent(requireContext(), ViewProjectActivity::class.java).apply {
-                putExtra("projectId", selectedProject.projectId)
-                putExtra("projectTitle", selectedProject.projectTitle)
-                putExtra("projectStatus", selectedProject.projectStatus)
-                putExtra("userId", selectedProject.userId)
-            }
-            startActivity(intent)
+            onProjectItemClick(selectedProject)
         }
 
         // Calculate the total height of the items
@@ -86,5 +79,15 @@ class ProjectsFragment : Fragment() {
         }
 
         return totalHeight
+    }
+
+    override fun onProjectItemClick(project: Project) {
+        val intent = Intent(requireContext(), ViewProjectActivity::class.java).apply {
+            putExtra("projectId", project.projectId)
+            putExtra("projectTitle", project.projectTitle)
+            putExtra("projectStatus", project.projectStatus)
+            putExtra("userId", project.userId)
+        }
+        startActivity(intent)
     }
 }
