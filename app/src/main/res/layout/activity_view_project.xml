@@ -116,7 +116,7 @@
                     android:textColor="?attr/colorTertiary"
                     android:textAppearance="@style/TextAppearance.JakartaSans.SemiBold12"
                     app:chipCornerRadius="20dp"
-                    android:backgroundTint="?attr/colorTertiaryContainer"
+                    app:chipBackgroundColor="?attr/colorTertiaryContainer"
                     app:chipStrokeWidth="0dp"
                     app:chipStrokeColor="@android:color/transparent"
                     />
@@ -133,7 +133,7 @@
                     android:textColor="?attr/colorOutline"
                     android:textAppearance="@style/TextAppearance.JakartaSans.SemiBold12"
                     app:chipCornerRadius="20dp"
-                    android:backgroundTint="?attr/colorOnSurfaceInverse"
+                    app:chipBackgroundColor="?attr/colorOnSurfaceInverse"
                     app:chipStrokeWidth="0dp"
                     app:chipStrokeColor="@android:color/transparent"
                     />
@@ -150,7 +150,7 @@
                     android:textColor="?attr/colorOnQuaternaryContainer"
                     android:textAppearance="@style/TextAppearance.JakartaSans.SemiBold12"
                     app:chipCornerRadius="20dp"
-                    android:backgroundTint="?attr/colorQuaternaryContainer"
+                    app:chipBackgroundColor="?attr/colorQuaternaryContainer"
                     app:chipStrokeWidth="0dp"
                     app:chipStrokeColor="@android:color/transparent"/>
 
@@ -165,7 +165,7 @@
                     android:textColor="?attr/colorPrimary"
                     android:textAppearance="@style/TextAppearance.JakartaSans.SemiBold12"
                     app:chipCornerRadius="20dp"
-                    android:backgroundTint="?attr/colorPrimaryContainer"
+                    app:chipBackgroundColor="?attr/colorPrimaryContainer"
                     app:chipStrokeWidth="0dp"
                     app:chipStrokeColor="@android:color/transparent"/>
 

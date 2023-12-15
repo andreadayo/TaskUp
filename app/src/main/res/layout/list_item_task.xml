@@ -72,7 +72,7 @@
                     android:textColor="?attr/colorOutline"
                     android:textAppearance="@style/TextAppearance.JakartaSans.SemiBold12"
                     app:chipCornerRadius="20dp"
-                    android:backgroundTint="?attr/colorOnSurfaceInverse"
+                    app:chipBackgroundColor="?attr/colorOnSurfaceInverse"
                     app:chipStrokeWidth="0dp"
                     app:chipStrokeColor="@android:color/transparent"
                     />
@@ -89,7 +89,7 @@
                     android:textColor="?attr/colorTertiary"
                     android:textAppearance="@style/TextAppearance.JakartaSans.SemiBold12"
                     app:chipCornerRadius="20dp"
-                    android:backgroundTint="?attr/colorTertiaryContainer"
+                    app:chipBackgroundColor="?attr/colorTertiaryContainer"
                     app:chipStrokeWidth="0dp"
                     app:chipStrokeColor="@android:color/transparent"
                     />
