@@ -75,7 +75,7 @@ class ProjectsFragment : Fragment(), OnProjectItemClickListener {
         for (i in 0 until adapter.count) {
             val listItem = adapter.getView(i, null, listView)
             listItem.measure(0, 0)
-            totalHeight += listItem.measuredHeight + 24
+            totalHeight += listItem.measuredHeight + listView.dividerHeight
         }
 
         return totalHeight
