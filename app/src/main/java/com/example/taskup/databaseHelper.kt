@@ -350,5 +350,20 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(
         db.close()
     }
 
+    fun getProjectNameById(projectId: Int): String {
+        val db = this.readableDatabase
+        val query = "SELECT $KEY_PROJECT_TITLE FROM $TABLE_PROJECTS WHERE $KEY_PROJECT_ID = ?"
+        val cursor = db.rawQuery(query, arrayOf(projectId.toString()))
+
+        var projectName = ""
+
+        if (cursor.moveToFirst()) {
+            projectName = cursor.getString(0)
+        }
+
+        cursor.close()
+        return projectName
+    }
+
 
 }

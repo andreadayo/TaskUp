@@ -40,6 +40,7 @@ class ListAdapter(private val context: Context, private val data: List<Task>) : 
             false
         )
 
+        val projectName: TextView = view.findViewById(R.id.tvProjectName)
         val taskName: TextView = view.findViewById(R.id.tvTaskName)
         val taskDueDate: TextView = view.findViewById(R.id.tvTaskDueDate)
         val taskDescription: TextView = view.findViewById(R.id.tvTaskDescription)
@@ -47,6 +48,7 @@ class ListAdapter(private val context: Context, private val data: List<Task>) : 
         val taskPriority: Chip = view.findViewById(R.id.chipPriority)
 
         val taskData = data[position]
+        projectName.text = dbHelper.getProjectNameById(taskData.projectId)
         taskName.text = taskData.taskTitle
 
         // Format the date

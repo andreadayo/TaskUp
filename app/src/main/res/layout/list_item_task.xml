@@ -35,6 +35,17 @@
             android:paddingBottom="10dp"
             android:layout_weight="1">
 
+            <TextView
+                android:id="@+id/tvProjectName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Project Name"
+                style="@style/TextAppearance.JakartaSans.Medium12"
+                android:textColor="?attr/colorOutline"
+                android:textStyle="bold"
+                android:layout_marginBottom="5dp"
+                />
+
             <!-- Task Name -->
             <TextView
                 android:id="@+id/tvTaskName"
