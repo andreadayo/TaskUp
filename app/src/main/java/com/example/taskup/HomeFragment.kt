@@ -39,6 +39,16 @@ class HomeFragment : Fragment() {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_home, container, false)
 
+        // Profile Link
+        val btnProfile = view.findViewById<ImageView>(R.id.btnProfile)
+        btnProfile.setOnClickListener {
+            val intent = Intent(requireContext(), ProfileActivity::class.java)
+            val username = intent.getStringExtra("USERNAME")
+            val user = "$username"
+            intent.putExtra("USERNAME", username)
+            startActivity(intent)
+        }
+
         val listView: ListView = view.findViewById(R.id.listView)
 
         // Show only the first three tasks

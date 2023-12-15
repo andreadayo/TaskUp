@@ -94,7 +94,7 @@
                         android:textColor="?attr/colorOnPrimaryContainer" />
 
                     <TextView
-                        android:id="@+id/tvUsername"
+                        android:id="@+id/tvEmail"
                         style="@style/TextAppearance.JakartaSans.Bold10"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"

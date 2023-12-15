@@ -289,5 +289,20 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(
         return userId
     }
 
+    @SuppressLint("Range")
+    fun getEmailFromUsername(username: String): String? {
+        val db = this.readableDatabase
+        val query = "SELECT $KEY_EMAIL FROM $TABLE_USERS WHERE $KEY_USERNAME = ?"
+        val cursor = db.rawQuery(query, arrayOf(username))
+
+        return cursor.use {
+            if (it.moveToFirst()) {
+                it.getString(it.getColumnIndex(KEY_EMAIL))
+            } else {
+                null
+            }
+        }
+    }
+
 
 }

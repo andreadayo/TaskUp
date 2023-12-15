@@ -1,7 +1,9 @@
 package com.example.taskup
 
 import android.app.Dialog
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import androidx.appcompat.app.AppCompatActivity
@@ -15,14 +17,33 @@ import com.google.android.material.materialswitch.MaterialSwitch
 import com.google.android.material.switchmaterial.SwitchMaterial
 
 class ProfileActivity : AppCompatActivity() {
+    private lateinit var dbHelper: DatabaseHelper
+    private lateinit var sharedPreferences: SharedPreferences
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_profile)
 
-        val username = intent.getStringExtra("USERNAME")
-        val user = "$username"
-        val tvName = findViewById<TextView>(R.id.tvName)
-        tvName.text = user
+        // Initialize SharedPreferences
+        sharedPreferences = this.getSharedPreferences("MyPreferences", Context.MODE_PRIVATE)
+
+        // Initialize DatabaseHelper
+        dbHelper = DatabaseHelper(this)
+
+        val username = sharedPreferences.getString("username", "")
+
+        if (username.isNullOrEmpty()) {
+            // Handle the case where the username is empty or null
+        } else {
+            // Continue with retrieving email based on the username
+            val tvName = findViewById<TextView>(R.id.tvName)
+            tvName.text = username
+
+            val userEmail: String? = dbHelper.getEmailFromUsername(username)
+
+            // Check if email is not null and set it in TextView, otherwise use a default value
+            val tvEmail = findViewById<TextView>(R.id.tvEmail)
+            tvEmail.text = userEmail ?: "Default Email"
+        }
 
         // Back Icon Link
         val btnBack = findViewById<ImageView>(R.id.btnBack)
